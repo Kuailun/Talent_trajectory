@@ -49,38 +49,15 @@
             form.output.remove();
             return form;
           }
-          <select name="selected_institution">
-           <option value="MIT">MIT</option>
-           <option value="HARVARD">Harvard</option> 
-           <option value="STANFORD">Stanford</option>
-           <option value="BERKELEY">UC Berkeley</option>
-           <option value="CMU">CMU</option>
-           <option value="CHICAGO">U Chicago</option> 
-           <option value="OXFORD">Oxford</option>
-           <option value="CAMBRIDGE">Cambridge</option>
-           <option value="SACLAY">Saclay</option>
-           <option value="COPENHAGEN">Copenhagen</option> 
-           <option value="MCGILL">McGill U</option>
-           <option value="TORONTO">UToronto</option>
-           <option value="TOKYO">UTokyo</option>
-           <option value="KYOTO">UKyoto</option> 
-           <option value="TSINGHUA">Tsinghua</option>
-           <option value="PEKING">Peking</option>
-           <option value="NUS">NUS</option> 
-           <option value="WEIZMANN">WEIZMANN</option>
-           <option value="CAPE">Cape Town</option>
-          </select>
+          //this place for dropdown
+
           var dropDown = d3.select("#table_container").append("select")
           .attr("name", "selected_institution");
 
-          <select name="selected_inoutflow">
-           <option value="Inflow">Inflow</option>
-           <option value="Outflow">Outflow</option>
-           </select>
           var dropDown = d3.select("#table_container").append("select")
           .attr("name", "selected_inoutflow");
-           
-          </select>
+
+
         // Width 
         let width = 900;
         let size = width * 0.8;
@@ -165,13 +142,13 @@
         
 
         // Use a scale for the height of the visualization
-        {
+        //{
             // this only for informative purposes.
-            while (true) {
-              var p = projection.rotate().map(d3.format(".2f"));
-              yield md`λ = ${p[0]}, φ = ${p[1]}, γ = ${p[2]}`
-            }
-          }
+            //while (true) {
+              //var p = projection.rotate().map(d3.format(".2f"));
+              //yield md`λ = ${p[0]}, φ = ${p[1]}, γ = ${p[2]}`
+            //}
+          //}
 
         //tooltip = d3.select("body")
             //.append("div")
