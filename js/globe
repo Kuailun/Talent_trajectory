@@ -1,0 +1,78 @@
+ // Our D3 code will go here.
+    d3.csv("https://gist.githubusercontent.com/jdev42092/46071bf3284265c37ea07d6328ef7a3a/raw/cc7bfc53f3853437749906ccf7d2cac49c43c9a2/neigh_311.csv", ({neighborhood, num_311}) => ({neighborhood: neighborhood, calls: +num_311})).then(function(bosData){
+
+        // Width and height of SVG
+        let width = 150;
+        let height = 175;
+        let margin = ({top: 15, right: 10, bottom: 25, left: 30})
+
+        // Initialize SVG object (using our pre-defined width and height)
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        // Get length of dataset
+        let arrayLength = bosData.length; // length of dataset
+        let maxValue = d3.max(bosData, d=> d.calls); // get max value of our dataset
+        let x_axisLength = (width - margin.right - margin.left); // length of x-axis in our layout
+        let y_axisLength = (height - margin.top - margin.bottom); // length of y-axis in our layout
+
+        // Use a scale for the height of the visualization
+        const yScale = d3.scaleLinear()
+            .domain([0, d3.max(bosData, d=> d.calls)])
+            .range([margin.bottom, height - margin.top]) 
+
+        tooltip = d3.select("body")
+            .append("div")
+            .style("position", "absolute")
+            .style("font-family", "'Open Sans', sans-serif")
+            .style("font-size", "12px")
+            .style("z-index", "10")
+            .style("visibility", "hidden"); 
+
+        // Select and generate rectangle elements
+        svg.selectAll( "rect" )
+            .data( bosData )
+            .enter()
+            .append("rect")
+            .attr( "x", (d,i) => (i*(x_axisLength/arrayLength) + margin.left)) 
+                // Set x coordinate of each bar to index of data value (i) times dynamically calculated bar width.
+                // Add left margin to account for our left margin.
+            .attr( "y", d => (height - yScale(d.calls)) )  
+                // Set y coordinate using yScale. 
+            .attr( "width", (x_axisLength/arrayLength) - 1 )    
+                // Set bar width using length of array, with 1px gap between each bar.
+            .attr( "height", d => yScale(d.calls) - yScale(0))                         
+                // Set height of rectangle to data value, accounting for bottom margin.
+            .attr( "fill", "steelblue")
+            .on("mouseover", d => tooltip.style("visibility", "visible").text(d.neighborhood + ": " + d.calls))
+            .on("mousemove", d => tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px").text(d.neighborhood + ": " + d.calls))
+            .on("mouseout", d => tooltip.style("visibility", "hidden"));
+
+        // Create y-axis, beginning at the top margin and ending at the bottom margin
+        svg.append("line")
+            .attr("x1", margin.left)
+            .attr("y1", margin.top)
+            .attr("x2", margin.left)
+            .attr("y2", height - margin.bottom)
+            .attr("stroke-width", 2)
+            .attr("stroke", "black");
+
+        // Create x-axis beginning at the left margin, and ending at the right margin
+        svg.append("line")
+            .attr("x1", margin.left)
+            .attr("y1", height - margin.bottom)
+            .attr("x2", width - margin.right)
+            .attr("y2", height - margin.bottom)
+            .attr("stroke-width", 2)
+            .attr("stroke", "black");
+
+        // Add a Label
+        // y-axis label
+        svg.append("text")
+            .attr("class", "y label")
+            .attr("text-anchor", "end")
+            .text("No. of 311 Calls")
+            .attr("transform", "translate(20, 20) rotate(-90)");    
+    })
