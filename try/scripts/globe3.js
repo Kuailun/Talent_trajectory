@@ -54,25 +54,78 @@ function locationAlongArc(start, end, theta) {
     return d3.geoInterpolate(start, end)(theta);
 };
 
-var e = document.getElementById("selected_institution");
-var selected_inst= e.options[e.selectedIndex].value.toLowerCase();
-
+/**===== ===== ===== ===== ===== Define the global variables ===== ===== ===== ===== =====**/
+var e
+var selected_inst="mit"
 var feature=[]
 var links=[]
 var selectedData = Object.create(null);
 var lines=[]
 
+//Prevent error when first load
 allflow.forEach(function(a) {
-  if (parseFloat(a[selected_inst])==1) {
+        if (parseFloat(a[selected_inst])==1) {
+            var source_lat = parseFloat(a.lat),
+                source_lng = parseFloat(a.lng),
+                target_lat = parseFloat(a.des_lat),
+                target_lng = parseFloat(a.des_lng);
+
+            // Build GeoJSON feature from this link
+            feature.push ({
+                type: 'Feature',
+                geometry: {
+                    type: "LineString",
+                    coordinates: [[source_lng,source_lat], [target_lng,target_lat]]
+                },
+                properties: {
+                    sourceSchool: a.name,
+                    targetSchool: a.des_schoolname,
+                    sourceCountry: a.country,
+                    targetCountry: a.des_country
+                }
+            });
+            links.push({
+                source: [source_lng,source_lat],
+                target: [target_lng,target_lat],
+                feature: feature
+            });
+            selectedData.type = "FeatureCollection",
+                selectedData.features = feature
+        }
+    }
+)
+
+links.forEach(function(a) {
+    var source = a.source,
+        target = a.target,
+        middle = locationAlongArc(source, target, 0.5);
+    lines.push ([
+        projection(source),
+        loftedProjection(middle),
+        projection(target)
+    ]);
+})
+//Onchange function to process after change the drop down
+document.getElementById("selected_institution").onchange=function () {
+    e = document.getElementById("selected_institution");
+    selected_inst= e.options[e.selectedIndex].value.toLowerCase();
+    console.log(selected_inst)
+    feature=[]
+    links=[]
+    selectedData = Object.create(null);
+    lines=[]
+
+    allflow.forEach(function(a) {
+            if (parseFloat(a[selected_inst])==1) {
                 var source_lat = parseFloat(a.lat),
                     source_lng = parseFloat(a.lng),
                     target_lat = parseFloat(a.des_lat),
                     target_lng = parseFloat(a.des_lng);
-    
+
                 // Build GeoJSON feature from this link
-                 feature.push ({ 
-                    type: 'Feature', 
-                    geometry: { 
+                feature.push ({
+                    type: 'Feature',
+                    geometry: {
                         type: "LineString",
                         coordinates: [[source_lng,source_lat], [target_lng,target_lat]]
                     },
@@ -89,12 +142,12 @@ allflow.forEach(function(a) {
                     feature: feature
                 });
                 selectedData.type = "FeatureCollection",
-                selectedData.features = feature
-                }
+                    selectedData.features = feature
             }
+        }
     )
 
-links.forEach(function(a) {
+    links.forEach(function(a) {
         var source = a.source,
             target = a.target,
             middle = locationAlongArc(source, target, 0.5);
@@ -104,76 +157,81 @@ links.forEach(function(a) {
             projection(target)
         ]);
     })
-  
+
+
+
+
+}
 
 d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) {
-  if (error) throw error;
+    if (error) throw error;
 
-  var land = topojson.feature(world, world.objects.land);
+    var land = topojson.feature(world, world.objects.land);
 
-  d3.timer(function(elapsed) {
-    var rotate = projection.rotate();
-    rotate[0] += velocity * 20;
-    projection.rotate(rotate);
-    render();
-  });
+    d3.timer(function(elapsed) {
+        var rotate = projection.rotate();
+        rotate[0] += velocity * 20;
+        projection.rotate(rotate);
+        render();
+    });
 
-function render() {
-  var rotate = projection.rotate();
-    backprojection.rotate([rotate[0] + 180, -rotate[1], -rotate[2]]);
+    function render() {
+        var rotate = projection.rotate();
+        backprojection.rotate([rotate[0] + 180, -rotate[1], -rotate[2]]);
 
-    context.clearRect(0, 0, width, height);
+        context.clearRect(0, 0, width, height);
 
-    context.beginPath();
-    path({type:"Sphere"});
-    context.fillStyle = '#fcfcfc';
-    context.fill();
+        context.beginPath();
+        path({type:"Sphere"});
+        context.fillStyle = '#fcfcfc';
+        context.fill();
 
-    context.beginPath();
-    backpath(land);
-    context.fillStyle = '#d0ddfa';
-    context.fill();
-    context.beginPath();
-    backpath(d3.geoGraticule()());
-    context.lineWidth = .1;
-    context.strokeStyle = '#97b3f6';
-    context.stroke();
+        context.beginPath();
+        backpath(land);
+        context.fillStyle = '#d0ddfa';
+        context.fill();
+        context.beginPath();
+        backpath(d3.geoGraticule()());
+        context.lineWidth = .1;
+        context.strokeStyle = '#97b3f6';
+        context.stroke();
 
 
-    context.beginPath();
-    path(d3.geoGraticule()());
-    context.lineWidth = .1;
-    context.strokeStyle = '#1046c6';
-    context.stroke();
+        context.beginPath();
+        path(d3.geoGraticule()());
+        context.lineWidth = .1;
+        context.strokeStyle = '#1046c6';
+        context.stroke();
 
-    context.beginPath();
-    path(land);
-    context.lineWidth = 1;
-    context.strokeStyle = '#1046c6';
-    context.stroke();
-    context.fillStyle = '#5c88ee';
-    var alpha = context.globalAlpha;
-    context.globalAlpha = 1;
-    context.fill();
-    context.globalAlpha = alpha;
+        context.beginPath();
+        path(land);
+        context.lineWidth = 1;
+        context.strokeStyle = '#1046c6';
+        context.stroke();
+        context.fillStyle = '#5c88ee';
+        var alpha = context.globalAlpha;
+        context.globalAlpha = 1;
+        context.fill();
+        context.globalAlpha = alpha;
 
-    context.beginPath();
-    path({type: "Sphere"});
-    context.lineWidth = .1;
-    context.strokeStyle = '#1046c6';
-    context.stroke();
+        context.beginPath();
+        path({type: "Sphere"});
+        context.lineWidth = .1;
+        context.strokeStyle = '#1046c6';
+        context.stroke();
 
-    context.beginPath();
-    path(selectedData);
-    context.lineWidth = 1;
-    context.stroke();
+        context.beginPath();
+        path(selectedData);
+        context.lineWidth = 1;
+        context.stroke();
 
-    context.beginPath();
-    swoosh(lines[0]);
-    context.lineWidth = 1;
-    context.stroke();
+        context.beginPath();
+        swoosh(lines[0]);
+        context.lineWidth = 1;
+        context.stroke();
 
-} 
+    }
 })
+
 }
 )

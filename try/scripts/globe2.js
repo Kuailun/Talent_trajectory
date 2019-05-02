@@ -1,4 +1,4 @@
-
+import "zebra.js"
 
 d3.csv("https://gist.githubusercontent.com/zhengyunhan/6bae5a5d7872ea314ca155281865fcc3/raw/820ee002c06751c4689e6f7a64318446cdd54fae/select_inflow.csv", function(inflow){
     d3.csv("https://gist.githubusercontent.com/zhengyunhan/6bae5a5d7872ea314ca155281865fcc3/raw/820ee002c06751c4689e6f7a64318446cdd54fae/select_outflow.csv", function(outflow){
