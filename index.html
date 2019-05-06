@@ -8,8 +8,21 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Talent Trajectory for Global Top 10000 Scholars</title>
+  <title>Talent Trajectory</title>
 
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <!-- <script src="js/jquery-1.10.2.js"></script>
+  <script src="js/bootstrap.js"></script> -->
+  <script src="try/110m.json" ></script>
+  <script src="https://unpkg.com/topojson-client@3"></script>
+  <script src="https://unpkg.com/versor"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  <script src="https://unpkg.com/d3-geo@1"></script>
+  <script src="https://unpkg.com/d3-geo-polygon@1"></script>
+  <script src="https://unpkg.com/topojson"></script>
+  <script src="https://unpkg.com/d3-inertia"></script>
+  <script src="https://unpkg.com/versor"></script>
+  <script src="https://bundle.run/zebras@0.0.11" ></script>
   <!-- Font Awesome Icons -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -26,11 +39,10 @@
 </head>
 
 <body id="page-top">
-  <script src="js/globe.js"></script>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Talent Trajecotry</a>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Talent Trajecotry Of Top Scholars in Top Institutions </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -78,7 +90,7 @@
           <h2 class="text-white mt-0">How many scholars going to xxx in 20xx?</h2>
           <hr class="divider light my-4">
           <p class="text-white-50 mb-4">in 20xx,......!</p>
-          <a class="btn btn-light btn-xl js-scroll-trigger" href="#Story">TELL ME MORE!</a>
+          <a class="btn btn-primary btn-xl js-scroll-trigger" href="#Story">TELL ME MORE!</a>
         </div>
       </div>
     </div>
@@ -127,24 +139,41 @@
   </section>
 
   <!-- Flow Globe Section -->
-  <section id="portfolio">
+  
+  <section  id="portfolio">
+      <script src="try/scripts/globe3.js"></script>
+      <select id="selected_institution">
+             <option value="MIT">MIT,USA</option>
+             <option value="HARVARD">Harvard,USA</option>
+             <option value="STANFORD">Stanford,USA</option>
+             <option value="BERKELEY">UC Berkeley,USA</option>
+             <option value="CMU">CMU,USA</option>
+             <option value="CHICAGO">U Chicago,USA</option>
+             <option value="OXFORD">Oxford,UK</option>
+             <option value="CAMBRIDGE">Cambridge,UK</option>
+             <option value="SACLAY">Saclay,France</option>
+             <option value="COPENHAGEN">Copenhagen,Denmark</option>
+             <option value="MCGILL">McGill U,Canada</option>
+             <option value="TORONTO">UToronto,Canada</option>
+             <option value="TOKYO">UTokyo,Japan</option>
+             <option value="KYOTO">UKyoto,Japan</option>
+             <option value="TSINGHUA">Tsinghua,China</option>
+             <option value="PEKING">Peking U,China</option>
+             <option value="NUS">NUS,Singapore</option>
+             <option value="WEIZMANN">Weizmann,Isarel</option>
+             <option value="CAPE">Cape Town,South Africa</option>
+            </select>
+      <select id="selected_inoutflow">
+             <option value="Inflow">Inflow</option>
+             <option value="Outflow">Outflow</option>
+             </select>
 
-    <div class="container-fluid p-0">
       
-        
+      
+  
 
-        </div>
-        
-    </div>
   </section>
 
-  <!-- Call to Action Section -->
-  <section class="page-section bg-dark text-white">
-    <div class="container text-center">
-      <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
-      <a class="btn btn-light btn-xl" href="https://startbootstrap.com/themes/creative/">Download Now!</a>
-    </div>
-  </section>
 
   <!-- Contact Section -->
   <section class="page-section" id="contact">
@@ -153,13 +182,13 @@
         <div class="col-lg-8 text-center">
           <h2 class="mt-0">Let's Get In Touch!</h2>
           <hr class="divider my-4">
-          <p class="text-muted mb-5">Got questions about the project? Give us a call or send us an email and we will get back to you as soon as possible!</p>
+          <p class="text-muted mb-5">Got questions about the project? Give us a call or send us an email!</p>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-4 ml-auto text-center">
           <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
-          <div>+1 (202) 555-0149</div>
+          <div>+1 (xxx) xxx-xxxx</div>
         </div>
         <div class="col-lg-4 mr-auto text-center">
           <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
