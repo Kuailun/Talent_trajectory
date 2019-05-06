@@ -16,7 +16,7 @@ var loftedProjection = d3.geoOrthographic()
     .precision(0.1)
     .rotate([-10,-30]);;
 
-var canvas = d3.select("body").append("canvas")
+var canvas = d3.select("#portfolio").append("canvas")
     .attr("width", width)
     .attr("height", height);
 
@@ -111,62 +111,69 @@ links.forEach(function(a) {
 })
 //Onchange function to process after change the drop down
 document.getElementById("selected_institution").onchange=function () {
-    e = document.getElementById("selected_institution");
-    selected_inst= e.options[e.selectedIndex].value.toLowerCase();
-    console.log(selected_inst)
-    console.log(selected_flow)
-    feature=[]
-    links=[]
-    selectedData = Object.create(null);
-    lines=[]
+    statemachine()
+}
 
-    allflow.forEach(function(a) {
-            if (parseFloat(a[selected_inst])==1 & parseFloat(a[selected_flow])==1) {
-                var source_lat = parseFloat(a.lat),
-                    source_lng = parseFloat(a.lng),
-                    target_lat = parseFloat(a.des_lat),
-                    target_lng = parseFloat(a.des_lng);
-
-                // Build GeoJSON feature from this link
-                feature.push ({
-                    type: 'Feature',
-                    geometry: {
-                        type: "LineString",
-                        coordinates: [[source_lng,source_lat], [target_lng,target_lat]]
-                    },
-                    properties: {
-                        sourceSchool: a.name,
-                        targetSchool: a.des_schoolname,
-                        sourceCountry: a.country,
-                        targetCountry: a.des_country
-                    }
-                });
-                links.push({
-                    source: [source_lng,source_lat],
-                    target: [target_lng,target_lat],
-                    feature: feature
-                });
-                selectedData.type = "FeatureCollection",
-                    selectedData.features = feature
-            }
+        document.getElementById("selected_inoutflow").onchange=function () {
+            statemachine()
         }
-    )
+        function statemachine(){
+            e = document.getElementById("selected_inoutflow");
+            selected_inoutflow= e.options[e.selectedIndex].value.toLowerCase();
+            ee = document.getElementById("selected_institution");
+            selected_inst= ee.options[ee.selectedIndex].value.toLowerCase();
 
-    links.forEach(function(a) {
-        var source = a.source,
-            target = a.target,
-            middle = locationAlongArc(source, target, 0.5);
-        lines.push ([
-            projection(source),
-            loftedProjection(middle),
-            projection(target)
-        ]);
-    })
+            console.log(selected_inst)
+            console.log(selected_inoutflow)
 
+            feature=[]
+            links=[]
+            selectedData = Object.create(null);
+            lines=[]
 
+            allflow.forEach(function(a) {
+                    if (parseFloat(a[selected_inst])==1) {
+                        var source_lat = parseFloat(a.lat),
+                            source_lng = parseFloat(a.lng),
+                            target_lat = parseFloat(a.des_lat),
+                            target_lng = parseFloat(a.des_lng);
 
+                        // Build GeoJSON feature from this link
+                        feature.push ({
+                            type: 'Feature',
+                            geometry: {
+                                type: "LineString",
+                                coordinates: [[source_lng,source_lat], [target_lng,target_lat]]
+                            },
+                            properties: {
+                                sourceSchool: a.name,
+                                targetSchool: a.des_schoolname,
+                                sourceCountry: a.country,
+                                targetCountry: a.des_country
+                            }
+                        });
+                        links.push({
+                            source: [source_lng,source_lat],
+                            target: [target_lng,target_lat],
+                            feature: feature
+                        });
+                        selectedData.type = "FeatureCollection",
+                            selectedData.features = feature
+                    }
+                }
+            )
 
-}}
+            links.forEach(function(a) {
+                var source = a.source,
+                    target = a.target,
+                    middle = locationAlongArc(source, target, 0.5);
+                lines.push ([
+                    projection(source),
+                    loftedProjection(middle),
+                    projection(target)
+                ]);
+            })
+        }
 
 d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) {
     if (error) throw error;
@@ -188,32 +195,32 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
 
         context.beginPath();
         path({type:"Sphere"});
-        context.fillStyle = '#fcfcfc';
+        context.fillStyle = '#F1F1FF';
         context.fill();
 
         context.beginPath();
         backpath(land);
-        context.fillStyle = '#d0ddfa';
+        context.fillStyle = '#CCCCFF';
         context.fill();
         context.beginPath();
         backpath(d3.geoGraticule()());
         context.lineWidth = .1;
-        context.strokeStyle = '#97b3f6';
+        context.strokeStyle = '#CCCCFF';
         context.stroke();
 
 
         context.beginPath();
         path(d3.geoGraticule()());
         context.lineWidth = .1;
-        context.strokeStyle = '#1046c6';
+        context.strokeStyle = '#9999FF';
         context.stroke();
 
         context.beginPath();
         path(land);
         context.lineWidth = 1;
-        context.strokeStyle = '#1046c6';
+        context.strokeStyle = '#9999FF';
         context.stroke();
-        context.fillStyle = '#5c88ee';
+        context.fillStyle = '#9999FF';
         var alpha = context.globalAlpha;
         context.globalAlpha = 1;
         context.fill();
@@ -222,7 +229,7 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
         context.beginPath();
         path({type: "Sphere"});
         context.lineWidth = .1;
-        context.strokeStyle = '#1046c6';
+        context.strokeStyle = '#FF00FF';
         context.stroke();
 
         // context.beginPath();
