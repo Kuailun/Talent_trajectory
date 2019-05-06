@@ -16,7 +16,7 @@ var loftedProjection = d3.geoOrthographic()
     .precision(0.1)
     .rotate([-10,-30]);;
 
-var canvas = d3.select("body").append("canvas")
+var canvas = d3.select("#portfolio").append("canvas")
     .attr("width", width)
     .attr("height", height);
 
@@ -183,32 +183,32 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
 
         context.beginPath();
         path({type:"Sphere"});
-        context.fillStyle = '#fcfcfc';
+        context.fillStyle = '#F1F1FF';
         context.fill();
 
         context.beginPath();
         backpath(land);
-        context.fillStyle = '#d0ddfa';
+        context.fillStyle = '#CCCCFF';
         context.fill();
         context.beginPath();
         backpath(d3.geoGraticule()());
         context.lineWidth = .1;
-        context.strokeStyle = '#97b3f6';
+        context.strokeStyle = '#CCCCFF';
         context.stroke();
 
 
         context.beginPath();
         path(d3.geoGraticule()());
         context.lineWidth = .1;
-        context.strokeStyle = '#1046c6';
+        context.strokeStyle = '#9999FF';
         context.stroke();
 
         context.beginPath();
         path(land);
         context.lineWidth = 1;
-        context.strokeStyle = '#1046c6';
+        context.strokeStyle = '#9999FF';
         context.stroke();
-        context.fillStyle = '#5c88ee';
+        context.fillStyle = '#9999FF';
         var alpha = context.globalAlpha;
         context.globalAlpha = 1;
         context.fill();
@@ -217,7 +217,7 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
         context.beginPath();
         path({type: "Sphere"});
         context.lineWidth = .1;
-        context.strokeStyle = '#1046c6';
+        context.strokeStyle = '#FF00FF';
         context.stroke();
 
         context.beginPath();
