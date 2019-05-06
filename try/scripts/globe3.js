@@ -34,6 +34,10 @@ var path = d3.geoPath()
     .projection(projection)
     .context(context);
 
+var path2 = d3.geoPath()
+    .projection(projection)
+    .context(context);
+
 var swoosh = d3.line()
     .curve(d3.curveNatural)
     .defined(function(d) { return projection.invert(d); })
@@ -110,13 +114,14 @@ document.getElementById("selected_institution").onchange=function () {
     e = document.getElementById("selected_institution");
     selected_inst= e.options[e.selectedIndex].value.toLowerCase();
     console.log(selected_inst)
+    console.log(selected_flow)
     feature=[]
     links=[]
     selectedData = Object.create(null);
     lines=[]
 
     allflow.forEach(function(a) {
-            if (parseFloat(a[selected_inst])==1) {
+            if (parseFloat(a[selected_inst])==1 & parseFloat(a[selected_flow])==1) {
                 var source_lat = parseFloat(a.lat),
                     source_lng = parseFloat(a.lng),
                     target_lat = parseFloat(a.des_lat),
@@ -161,7 +166,7 @@ document.getElementById("selected_institution").onchange=function () {
 
 
 
-}
+}}
 
 d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) {
     if (error) throw error;
@@ -220,18 +225,20 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
         context.strokeStyle = '#1046c6';
         context.stroke();
 
-        context.beginPath();
-        path(selectedData);
-        context.lineWidth = 1;
-        context.stroke();
+        // context.beginPath();
+        // path(selectedData);
+        // context.lineWidth = 1;
+        // context.stroke();
 
         context.beginPath();
-        swoosh(lines[0]);
+        path2(selectedData);
         context.lineWidth = 1;
         context.stroke();
+        console.log(selectedData)
 
     }
 })
 
 }
+
 )
