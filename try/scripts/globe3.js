@@ -227,6 +227,7 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
         context.lineWidth = .1;
         context.strokeStyle = '#FF00FF';
         context.stroke();
+        // color for outflow lines: #00ffff 
 
         context.beginPath();
         path(selectedData);
