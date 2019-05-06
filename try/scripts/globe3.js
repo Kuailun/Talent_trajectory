@@ -107,61 +107,69 @@ links.forEach(function(a) {
 })
 //Onchange function to process after change the drop down
 document.getElementById("selected_institution").onchange=function () {
-    e = document.getElementById("selected_institution");
-    selected_inst= e.options[e.selectedIndex].value.toLowerCase();
-    console.log(selected_inst)
-    feature=[]
-    links=[]
-    selectedData = Object.create(null);
-    lines=[]
-
-    allflow.forEach(function(a) {
-            if (parseFloat(a[selected_inst])==1) {
-                var source_lat = parseFloat(a.lat),
-                    source_lng = parseFloat(a.lng),
-                    target_lat = parseFloat(a.des_lat),
-                    target_lng = parseFloat(a.des_lng);
-
-                // Build GeoJSON feature from this link
-                feature.push ({
-                    type: 'Feature',
-                    geometry: {
-                        type: "LineString",
-                        coordinates: [[source_lng,source_lat], [target_lng,target_lat]]
-                    },
-                    properties: {
-                        sourceSchool: a.name,
-                        targetSchool: a.des_schoolname,
-                        sourceCountry: a.country,
-                        targetCountry: a.des_country
-                    }
-                });
-                links.push({
-                    source: [source_lng,source_lat],
-                    target: [target_lng,target_lat],
-                    feature: feature
-                });
-                selectedData.type = "FeatureCollection",
-                    selectedData.features = feature
-            }
-        }
-    )
-
-    links.forEach(function(a) {
-        var source = a.source,
-            target = a.target,
-            middle = locationAlongArc(source, target, 0.5);
-        lines.push ([
-            projection(source),
-            loftedProjection(middle),
-            projection(target)
-        ]);
-    })
-
-
-
-
+    statemachine()
 }
+
+        document.getElementById("selected_inoutflow").onchange=function () {
+            statemachine()
+        }
+        function statemachine(){
+            e = document.getElementById("selected_inoutflow");
+            selected_inoutflow= e.options[e.selectedIndex].value.toLowerCase();
+            ee = document.getElementById("selected_institution");
+            selected_inst= ee.options[ee.selectedIndex].value.toLowerCase();
+
+            console.log(selected_inst)
+            console.log(selected_inoutflow)
+
+            feature=[]
+            links=[]
+            selectedData = Object.create(null);
+            lines=[]
+
+            allflow.forEach(function(a) {
+                    if (parseFloat(a[selected_inst])==1) {
+                        var source_lat = parseFloat(a.lat),
+                            source_lng = parseFloat(a.lng),
+                            target_lat = parseFloat(a.des_lat),
+                            target_lng = parseFloat(a.des_lng);
+
+                        // Build GeoJSON feature from this link
+                        feature.push ({
+                            type: 'Feature',
+                            geometry: {
+                                type: "LineString",
+                                coordinates: [[source_lng,source_lat], [target_lng,target_lat]]
+                            },
+                            properties: {
+                                sourceSchool: a.name,
+                                targetSchool: a.des_schoolname,
+                                sourceCountry: a.country,
+                                targetCountry: a.des_country
+                            }
+                        });
+                        links.push({
+                            source: [source_lng,source_lat],
+                            target: [target_lng,target_lat],
+                            feature: feature
+                        });
+                        selectedData.type = "FeatureCollection",
+                            selectedData.features = feature
+                    }
+                }
+            )
+
+            links.forEach(function(a) {
+                var source = a.source,
+                    target = a.target,
+                    middle = locationAlongArc(source, target, 0.5);
+                lines.push ([
+                    projection(source),
+                    loftedProjection(middle),
+                    projection(target)
+                ]);
+            })
+        }
 
 d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) {
     if (error) throw error;
