@@ -34,6 +34,10 @@ var path = d3.geoPath()
     .projection(projection)
     .context(context);
 
+var path2 = d3.geoPath()
+    .projection(projection)
+    .context(context);
+
 var swoosh = d3.line()
     .curve(d3.curveNatural)
     .defined(function(d) { return projection.invert(d); })
@@ -229,18 +233,20 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
         context.stroke();
         // color for outflow lines: #00ffff 
 
-        context.beginPath();
-        path(selectedData);
-        context.lineWidth = 1;
-        context.stroke();
+        // context.beginPath();
+        // path(selectedData);
+        // context.lineWidth = 1;
+        // context.stroke();
 
         context.beginPath();
-        swoosh(lines[0]);
+        path2(selectedData);
         context.lineWidth = 1;
         context.stroke();
+        console.log(selectedData)
 
     }
 })
 
 }
+
 )
