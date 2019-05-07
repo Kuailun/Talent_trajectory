@@ -19,6 +19,9 @@ var loftedProjection = d3.geoOrthographic()
 var canvas = d3.select("body").append("canvas")
     .attr("width", width)
     .attr("height", height);
+// var canvas = d3.select("#portfolio").append("canvas")
+//     .attr("width", width)
+//     .attr("height", height);
 
 var context = canvas.node().getContext("2d");
 
@@ -133,7 +136,9 @@ document.getElementById("selected_institution").onchange=function () {
             lines=[]
 
             allflow.forEach(function(a) {
-                    if (parseFloat(a[selected_inst])==1) {
+
+                    if (parseFloat(a[selected_inst])==1&&parseFloat(a[selected_inoutflow])==1) {
+                        console.log(a)
                         var source_lat = parseFloat(a.lat),
                             source_lng = parseFloat(a.lng),
                             target_lat = parseFloat(a.des_lat),
@@ -196,32 +201,32 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
 
         context.beginPath();
         path({type:"Sphere"});
-        context.fillStyle = '#fcfcfc';
+        context.fillStyle = '#F1F1FF';
         context.fill();
 
         context.beginPath();
         backpath(land);
-        context.fillStyle = '#d0ddfa';
+        context.fillStyle = '#CCCCFF';
         context.fill();
         context.beginPath();
         backpath(d3.geoGraticule()());
         context.lineWidth = .1;
-        context.strokeStyle = '#97b3f6';
+        context.strokeStyle = '#CCCCFF';
         context.stroke();
 
 
         context.beginPath();
         path(d3.geoGraticule()());
         context.lineWidth = .1;
-        context.strokeStyle = '#1046c6';
+        context.strokeStyle = '#9999FF';
         context.stroke();
 
         context.beginPath();
         path(land);
         context.lineWidth = 1;
-        context.strokeStyle = '#1046c6';
+        context.strokeStyle = '#9999FF';
         context.stroke();
-        context.fillStyle = '#5c88ee';
+        context.fillStyle = '#9999FF';
         var alpha = context.globalAlpha;
         context.globalAlpha = 1;
         context.fill();
@@ -230,7 +235,7 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
         context.beginPath();
         path({type: "Sphere"});
         context.lineWidth = .1;
-        context.strokeStyle = '#1046c6';
+        context.strokeStyle = '#FF00FF';
         context.stroke();
         // color for outflow lines: #00ffff 
 
@@ -243,7 +248,6 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
         path2(selectedData);
         context.lineWidth = 1;
         context.stroke();
-        console.log(selectedData)
 
     }
 })
