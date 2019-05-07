@@ -4,7 +4,7 @@
     <title>I'm Learning D3</title>
     <!-- <script src="js/creative.min.js"></script> -->
     <!-- <script src="http://d3js.org/d3.v5.min.js" charset="utf-8"></script> -->
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+<!--    <script src="https://d3js.org/d3.v4.min.js"></script>-->
     <!-- <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.js"></script> -->
     <script src="110m.json" ></script>
@@ -15,47 +15,100 @@
     <script src="https://unpkg.com/d3-geo-polygon@1"></script>
     <script src="https://unpkg.com/topojson"></script>
     <script src="https://unpkg.com/d3-inertia"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="https://unpkg.com/versor"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <style>
         text {
             font-family: "Open Sans", sans-serif;
-            font-size: 12px;
+            font-size: 10px;
+        }
+
+        body {
+            font: 10px sans-serif;
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+        .bar {
+            fill: orange;
+        }
+
+        .bar:hover {
+            fill: orangered ;
+        }
+
+        .x.axis path {
+            display: none;
+        }
+
+        .d3-tip {
+            line-height: 1;
+            font-weight: bold;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            border-radius: 2px;
+        }
+
+        /* Creates a small triangle extender for the tooltip */
+        .d3-tip:after {
+            box-sizing: border-box;
+            display: inline;
+            font-size: 10px;
+            width: 100%;
+            line-height: 1;
+            color: rgba(0, 0, 0, 0.8);
+            content: "\25BC";
+            position: absolute;
+            text-align: center;
+        }
+
+        /* Style northward tooltips differently */
+        .d3-tip.n:after {
+            margin: -1px 0 0 0;
+            top: 100%;
+            left: 0;
         }
     </style>
 </head>
 <body>
-    <select id="selected_institution">
-           <option value="MIT">MIT</option>
-           <option value="HARVARD">Harvard</option>
-           <option value="STANFORD">Stanford</option>
-           <option value="BERKELEY">UC Berkeley</option>
-           <option value="CMU">CMU</option>
-           <option value="CHICAGO">U Chicago</option>
-           <option value="OXFORD">Oxford</option>
-           <option value="CAMBRIDGE">Cambridge</option>
-           <option value="SACLAY">Saclay</option>
-           <option value="COPENHAGEN">Copenhagen</option>
-           <option value="MCGILL">McGill U</option>
-           <option value="TORONTO">UToronto</option>
-           <option value="TOKYO">UTokyo</option>
-           <option value="KYOTO">UKyoto</option>
-           <option value="TSINGHUA">Tsinghua</option>
-           <option value="PEKING">Peking</option>
-           <option value="NUS">NUS</option>
-           <option value="WEIZMANN">WEIZMANN</option>
-           <option value="CAPE">Cape Town</option>
-          </select>
-    <select id="selected_inoutflow">
-           <option value="inflow">Inflow</option>
-           <option value="outflow">Outflow</option>
-           </select>
+<!--    <select id="selected_institution">-->
+<!--           <option value="MIT">MIT</option>-->
+<!--           <option value="HARVARD">Harvard</option>-->
+<!--           <option value="STANFORD">Stanford</option>-->
+<!--           <option value="BERKELEY">UC Berkeley</option>-->
+<!--           <option value="CMU">CMU</option>-->
+<!--           <option value="CHICAGO">U Chicago</option>-->
+<!--           <option value="OXFORD">Oxford</option>-->
+<!--           <option value="CAMBRIDGE">Cambridge</option>-->
+<!--           <option value="SACLAY">Saclay</option>-->
+<!--           <option value="COPENHAGEN">Copenhagen</option>-->
+<!--           <option value="MCGILL">McGill U</option>-->
+<!--           <option value="TORONTO">UToronto</option>-->
+<!--           <option value="TOKYO">UTokyo</option>-->
+<!--           <option value="KYOTO">UKyoto</option>-->
+<!--           <option value="TSINGHUA">Tsinghua</option>-->
+<!--           <option value="PEKING">Peking</option>-->
+<!--           <option value="NUS">NUS</option>-->
+<!--           <option value="WEIZMANN">WEIZMANN</option>-->
+<!--           <option value="CAPE">Cape Town</option>-->
+<!--          </select>-->
+<!--    <select id="selected_inoutflow">-->
+<!--           <option value="inflow">Inflow</option>-->
+<!--           <option value="outflow">Outflow</option>-->
+<!--           </select>-->
     <!--<canvas id="myCanvas" width="400" height="400" style="border:1px solid #000000;">-->
     <!--</canvas>-->
     <!-- <script src="https://static.observablehq.com/bundle.7967242bbce0924a9d34b0462e77d4dbd7a58df3088794fad513ca325e419ab0.js" integrity="sha512-XMx8G6tP080sQDhW4BhujCoLGh4BN409JwJ775pRP96LXVlxu+WLrJSDCHMi3cL1Sue+CrpscpFOLOtb3feMDg==" crossorigin=""></script>     -->
     <!-- <script async="" src="https://www.google-analytics.com/analytics.js"></script> -->
     <!--<script src="scripts/globe.js"></script>-->
     <script src="https://bundle.run/zebras@0.0.11" ></script>
-    <script src="scripts/globe3.js"></script>
+<!--    <script src="scripts/globe3.js"></script>-->
+    <script src="scripts/stock_figure.js"></script>
 
 </body>
 </html>
