@@ -34,35 +34,58 @@ var svg = d3.select("body").append("svg")
 
 svg.call(tip);
 
-d3.csv("https://gist.githubusercontent.com/ycfan14/ea58c0e7c49ff67947f0d2a1fca72fec/raw/dc391f101a79bad5c8fdcb7ada4699e6ef4b3025/stock_start.csv", type, function(data){
-    x.domain(data.map(function(d) { return d.University; }));
-    y.domain([0, d3.max(data, function(d) { return d.Number; })]);
+d3.csv("https://gist.githubusercontent.com/ycfan14/c90bc325d675be4720e6819ed819e45b/raw/c42524e3e5abc95a6ded2462b20f9b50370defc5/stock_all.csv", type, function(data){
 
-    svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
+    statemachine()
+    document.getElementById("selected_startStop").onchange=function () {
+        statemachine()
+    }
 
-    svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("Number");
+    function statemachine() {
+        e = document.getElementById("selected_startStop");
+        selected_startStop = e.options[e.selectedIndex].value;
+        var data_start = zebras.filter(r => r[selected_startStop] == 1, data);
 
-    svg.selectAll(".bar")
-        .data(data)
-        .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", function(d) { return x(d.University); })
-        .attr("width", x.rangeBand())
-        .attr("y", function(d) { return y(d.Number); })
-        .attr("height", function(d) { return height - y(d.Number); })
-        .on('mouseover', tip.show)
-        .on('mouseout', tip.hide)
+        x.domain(data.map(function (d) {
+            return d.University;
+        }));
+        y.domain([0, d3.max(data, function (d) {
+            return d.Number;
+        })]);
+
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Number");
+
+        svg.selectAll(".bar")
+            .data(data_start)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", function (d) {
+                return x(d.University);
+            })
+            .attr("width", x.rangeBand())
+            .attr("y", function (d) {
+                return y(d.Number);
+            })
+            .attr("height", function (d) {
+                return height - y(d.Number);
+            })
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide)
+
+    }
 
 });
 
