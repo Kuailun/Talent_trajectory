@@ -1,4 +1,4 @@
-d3.csv("https://gist.githubusercontent.com/zhengyunhan/9e4389a57caff817763c8ed55bdc77ff/raw/60cddf7ed40d787954b04d3871957826244ce2ce/inoutflow_5years.csv", function(allflow){
+d3.csv("https://gist.githubusercontent.com/ycfan14/2c09391f468fd8b3a4c3614e62d7d3a5/raw/78012a95feb12768c9bc8cae6de988321c388942/gistfile1.txt", function(allflow){
 var width = 960,
     height = 500;
 
@@ -70,48 +70,7 @@ var selectedData = Object.create(null);
 var lines=[]
 
 //Prevent error when first load
-allflow.forEach(function(a) {
-        if (parseFloat(a[selected_inst])==1) {
-            var source_lat = parseFloat(a.lat),
-                source_lng = parseFloat(a.lng),
-                target_lat = parseFloat(a.des_lat),
-                target_lng = parseFloat(a.des_lng);
-
-            // Build GeoJSON feature from this link
-            feature.push ({
-                type: 'Feature',
-                geometry: {
-                    type: "LineString",
-                    coordinates: [[source_lng,source_lat], [target_lng,target_lat]]
-                },
-                properties: {
-                    sourceSchool: a.name,
-                    targetSchool: a.des_schoolname,
-                    sourceCountry: a.country,
-                    targetCountry: a.des_country
-                }
-            });
-            links.push({
-                source: [source_lng,source_lat],
-                target: [target_lng,target_lat],
-                feature: feature
-            });
-            selectedData.type = "FeatureCollection",
-                selectedData.features = feature
-        }
-    }
-)
-
-links.forEach(function(a) {
-    var source = a.source,
-        target = a.target,
-        middle = locationAlongArc(source, target, 0.5);
-    lines.push ([
-        projection(source),
-        loftedProjection(middle),
-        projection(target)
-    ]);
-})
+        statemachine()
 //Onchange function to process after change the drop down
 document.getElementById("selected_institution").onchange=function () {
     statemachine()
@@ -123,9 +82,9 @@ document.getElementById("selected_institution").onchange=function () {
         }
         function statemachine(){
             e = document.getElementById("selected_inoutflow");
-            selected_inoutflow= e.options[e.selectedIndex].value.toLowerCase();
+            selected_inoutflow= e.options[e.selectedIndex].value;
             ee = document.getElementById("selected_institution");
-            selected_inst= ee.options[ee.selectedIndex].value.toLowerCase();
+            selected_inst= ee.options[ee.selectedIndex].value;
 
             console.log(selected_inst)
             console.log(selected_inoutflow)
