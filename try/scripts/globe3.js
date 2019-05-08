@@ -61,6 +61,11 @@ function locationAlongArc(start, end, theta) {
     return d3.geoInterpolate(start, end)(theta);
 };
 
+var dict = {
+    inflow: "#00ffff",
+    outflow: "#FF00FF" 
+  };
+
 /**===== ===== ===== ===== ===== Define the global variables ===== ===== ===== ===== =====**/
 var e
 var selected_inst="mit"
@@ -88,6 +93,9 @@ document.getElementById("selected_institution").onchange=function () {
 
             console.log(selected_inst)
             console.log(selected_inoutflow)
+            
+            color=dict[selected_inoutflow]
+            console.log(color)
 
             feature=[]
             links=[]
@@ -97,7 +105,7 @@ document.getElementById("selected_institution").onchange=function () {
             allflow.forEach(function(a) {
 
                     if (parseFloat(a[selected_inst])==1&&parseFloat(a[selected_inoutflow])==1) {
-                        console.log(a)
+                        //console.log(a)
                         var source_lat = parseFloat(a.lat),
                             source_lng = parseFloat(a.lng),
                             target_lat = parseFloat(a.des_lat),
@@ -206,6 +214,7 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
         context.beginPath();
         path2(selectedData);
         context.lineWidth = 1;
+        context.strokeStyle = color,
         context.stroke();
 
     }
