@@ -1,4 +1,5 @@
 d3.csv("https://gist.githubusercontent.com/ycfan14/2c09391f468fd8b3a4c3614e62d7d3a5/raw/78012a95feb12768c9bc8cae6de988321c388942/gistfile1.txt", function(allflow){
+
 var width = 960,
     height = 500;
 
@@ -16,12 +17,12 @@ var loftedProjection = d3.geoOrthographic()
     .precision(0.1)
     .rotate([-10,-30]);;
 
-var canvas = d3.select("body").append("canvas")
-    .attr("width", width)
-    .attr("height", height);
-// var canvas = d3.select("#portfolio").append("canvas")
-//     .attr("width", width)
-//     .attr("height", height);
+//var canvas = d3.select("body").append("canvas")
+   //.attr("width", width)
+   // .attr("height", height);
+ var canvas = d3.select("#portfolio").append("canvas")
+     .attr("width", width)
+     .attr("height", height);
 
 var context = canvas.node().getContext("2d");
 
@@ -77,18 +78,25 @@ var lines=[]
 //Prevent error when first load
         statemachine()
 //Onchange function to process after change the drop down
-document.getElementById("selected_institution").onchange=function () {
+console.log(document.getElementById("selectedInstitution"))
+var select = d3.select('#selectedInstitution')
+    .on('change',onchange)
+console.log(select)
+function onchange(){console.log('heheheeheheheheheh')}
+document.getElementById("selectedInstitution").onchange=function () {
+    console.log(2323323232232)
     statemachine()
 }
 
 
         document.getElementById("selected_inoutflow").onchange=function () {
+            console.log(83848348348384384328423958729387)
             statemachine()
         }
         function statemachine(){
             e = document.getElementById("selected_inoutflow");
             selected_inoutflow= e.options[e.selectedIndex].value;
-            ee = document.getElementById("selected_institution");
+            ee = document.getElementById("selectedInstitution");
             selected_inst= ee.options[ee.selectedIndex].value;
 
             console.log(selected_inst)
@@ -103,9 +111,8 @@ document.getElementById("selected_institution").onchange=function () {
             lines=[]
 
             allflow.forEach(function(a) {
-
-                    if (parseFloat(a[selected_inst])==1&&parseFloat(a[selected_inoutflow])==1) {
-                        //console.log(a)
+                    // console.log(parseFloat(a[selected_inst]),a[selected_inoutflow])
+                    if (parseFloat(a[selected_inst])==1&&parseFloat(a[selected_inoutflow.toLowerCase()])==1) {
                         var source_lat = parseFloat(a.lat),
                             source_lng = parseFloat(a.lng),
                             target_lat = parseFloat(a.des_lat),
@@ -206,16 +213,16 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
         context.stroke();
         // color for outflow lines: #00ffff 
 
-        // context.beginPath();
-        // path(selectedData);
-        // context.lineWidth = 1;
-        // context.stroke();
-
         context.beginPath();
-        path2(selectedData);
+        path(selectedData);
         context.lineWidth = 1;
-        context.strokeStyle = color,
         context.stroke();
+
+        // context.beginPath();
+        // path2(selectedData);
+        // context.lineWidth = 1;
+        // context.strokeStyle = color,
+        // context.stroke();
 
     }
 })
