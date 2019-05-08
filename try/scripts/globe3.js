@@ -64,7 +64,7 @@ function locationAlongArc(start, end, theta) {
 
 var dict = {
     inflow: "#00ffff",
-    outflow: "#FF00FF" 
+    outflow: "#FF00FF"
   };
 
 /**===== ===== ===== ===== ===== Define the global variables ===== ===== ===== ===== =====**/
@@ -93,6 +93,10 @@ document.getElementById("selectedInstitution").onchange=function () {
             console.log(83848348348384384328423958729387)
             statemachine()
         }
+
+        document.getElementById("myRange").onchange=function () {
+            statemachine()
+        }
         function statemachine(){
             e = document.getElementById("selected_inoutflow");
             selected_inoutflow= e.options[e.selectedIndex].value;
@@ -101,7 +105,18 @@ document.getElementById("selectedInstitution").onchange=function () {
 
             console.log(selected_inst)
             console.log(selected_inoutflow)
-            
+
+            //slider
+            slider = document.getElementById("myRange")
+            selected_year=slider.value;
+            output = document.getElementById("demo");
+            output.innerHTML = slider.value;
+            console.log(selected_year)
+
+            slider.oninput = function() {
+            output.innerHTML = this.value;
+            }
+
             color=dict[selected_inoutflow]
             console.log(color)
 
@@ -111,8 +126,8 @@ document.getElementById("selectedInstitution").onchange=function () {
             lines=[]
 
             allflow.forEach(function(a) {
-                    // console.log(parseFloat(a[selected_inst]),a[selected_inoutflow])
-                    if (parseFloat(a[selected_inst])==1&&parseFloat(a[selected_inoutflow.toLowerCase()])==1) {
+
+                    if (parseFloat(a[selected_inst])==1&&parseFloat(a[selected_inoutflow])==1&&parseFloat(a["year"])==selected_year) {
                         var source_lat = parseFloat(a.lat),
                             source_lng = parseFloat(a.lng),
                             target_lat = parseFloat(a.des_lat),
@@ -211,7 +226,7 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
         context.lineWidth = .1;
         context.strokeStyle = '#FF00FF';
         context.stroke();
-        // color for outflow lines: #00ffff 
+        // color for outflow lines: #00ffff
 
         context.beginPath();
         path(selectedData);
