@@ -62,8 +62,8 @@ function locationAlongArc(start, end, theta) {
 };
 
 var dict = {
-    inflow: "red",
-    outflow: "#00ffff" 
+    inflow: "#00ffff",
+    outflow: "#FF00FF" 
   };
 
 /**===== ===== ===== ===== ===== Define the global variables ===== ===== ===== ===== =====**/
