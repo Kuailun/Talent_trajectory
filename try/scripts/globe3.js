@@ -93,10 +93,6 @@ document.getElementById("selectedInstitution").onchange=function () {
             console.log(83848348348384384328423958729387)
             statemachine()
         }
-
-        document.getElementById("myRange").onchange=function () {
-            statemachine()
-        }
         function statemachine(){
             e = document.getElementById("selected_inoutflow");
             selected_inoutflow= e.options[e.selectedIndex].value;
@@ -105,18 +101,7 @@ document.getElementById("selectedInstitution").onchange=function () {
 
             console.log(selected_inst)
             console.log(selected_inoutflow)
-
-            //slider
-            slider = document.getElementById("myRange")
-            selected_year=slider.value;
-            output = document.getElementById("demo");
-            output.innerHTML = slider.value;
-            console.log(selected_year)
-
-            slider.oninput = function() {
-            output.innerHTML = this.value;
-            }
-
+            
             color=dict[selected_inoutflow]
             console.log(color)
 
@@ -127,7 +112,8 @@ document.getElementById("selectedInstitution").onchange=function () {
 
             allflow.forEach(function(a) {
 
-                    if (parseFloat(a[selected_inst])==1&&parseFloat(a[selected_inoutflow])==1&&parseFloat(a["year"])==selected_year) {
+                    if (parseFloat(a[selected_inst])==1&&parseFloat(a[selected_inoutflow])==1) {
+                        //console.log(a)
                         var source_lat = parseFloat(a.lat),
                             source_lng = parseFloat(a.lng),
                             target_lat = parseFloat(a.des_lat),
