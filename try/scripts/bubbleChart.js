@@ -1,41 +1,31 @@
 // set the dimensions and margins of the graph
-var margin = {top: 40, right: 150, bottom: 60, left: 60},
-    width = 550 - margin.left - margin.right,
-    height = 420 - margin.top - margin.bottom;
+var margin2 = {top: 40, right: 150, bottom: 60, left: 60},
+    width2 = 550 - margin2.left - margin2.right,
+    height2 = 420 - margin2.top - margin2.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#bubble")
+var svg2 = d3.select("#bubble")
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", width2 + margin2.left + margin2.right)
+    .attr("height", height2 + margin2.top + margin2.bottom)
     .append("g")
     .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+        "translate(" + margin2.left + "," + margin2.top + ")");
 
 //Read the data
 d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5539/raw/41d1e84894a81b6f5a0980e45b9341872a2a4785/bubble_nonUS.csv", function(data) {
-
-// d3.csv("https://gist.githubusercontent.com/ycfan14/9b8e0e7639bcb2769caaf6e1797ef348/raw/ae77949f83e560f39c0082a47605ff73d4c0c6fb/trial_2010_nonUS.csv", function(data) {
-
-    // ---------------------------//
-    //       AXIS  AND SCALE      //
-    // ---------------------------//
-
-    statemachine()
-
+    statemachine2()
     document.getElementById("bubbleRange").onchange=function () {
-        statemachine()
+        statemachine2()
     }
+    function statemachine2() {
 
-
-    function statemachine() {
-
-        svg.selectAll("circle").remove();
-        svg.selectAll("g").remove();
-        svg.selectAll("legend").remove();
-        svg.selectAll("text").remove();
-        svg.selectAll("dot").remove();
-        svg.selectAll("line").remove();
+        svg2.selectAll("circle").remove();
+        svg2.selectAll("g").remove();
+        svg2.selectAll("legend").remove();
+        svg2.selectAll("text").remove();
+        svg2.selectAll("dot").remove();
+        svg2.selectAll("line").remove();
 
 
 
@@ -59,18 +49,18 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                     .domain([0, d3.max(data.filter(function(d) { return d["year"] == selected_year }), function (d) {
                         return +d.inflow;
                     })])
-                    .range([0, width]);
+                    .range([0, width2]);
 
-                svg.append("g")
-                    .attr("transform", "translate(0," + height + ")")
+                svg2.append("g")
+                    .attr("transform", "translate(0," + height2 + ")")
                     // .call(d3.axisBottom(x).ticks(3));
                     .call(d3.axisBottom(x).ticks(3));
 
                 // Add X axis label:
-                svg.append("text")
+                svg2.append("text")
                     .attr("text-anchor", "end")
-                    .attr("x", width)
-                    .attr("y", height + 50)
+                    .attr("x", width2)
+                    .attr("y", height2 + 50)
                     .text("Inflow");
 
                 // Add Y axis
@@ -78,12 +68,12 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                     .domain([0, d3.max(data.filter(function(d) { return d["year"] == selected_year }), function (d) {
                         return +d.outflow;
                     })])
-                    .range([height, 0]);
-                svg.append("g")
+                    .range([height2, 0]);
+                svg2.append("g")
                     .call(d3.axisLeft(y));
 
                 // Add Y axis label:
-                svg.append("text")
+                svg2.append("text")
                     .attr("text-anchor", "end")
                     .attr("x", 0)
                     .attr("y", -20)
@@ -97,10 +87,11 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                     })])
                     .range([2, 30]);
 
+        var schemeSet1=["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf", "#999999"];
                 // Add a scale for bubble color
                 var myColor = d3.scaleOrdinal()
                     .domain(["Europe", "North America", "Asia", "South America", "Africa", "Oceania"])
-                    .range(d3.schemeSet1);
+                    .range(schemeSet1);
 
                 // ---------------------------//
                 //      TOOLTIP               //
@@ -163,7 +154,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
 
                 // Add dots
 
-                svg.append('g')
+                svg2.append('g')
                     .selectAll("dot")
                     .data(data.filter(function(d) { return d["year"] == selected_year }))
                     .enter()
@@ -197,14 +188,14 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                 //??????
                 var xCircle = 390
                 var xLabel = 440
-                svg
+                svg2
                     .selectAll("legend")
                     .data(valuesToShow)
                     .enter()
                     .append("circle")
                     .attr("cx", xCircle)
                     .attr("cy", function (d) {
-                        return height - 100 - z(d)
+                        return height2 - 100 - z(d)
                     })
                     .attr("r", function (d) {
                         return z(d)
@@ -213,7 +204,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                     .attr("stroke", "black")
 
                 // Add legend: segments
-                svg
+                svg2
                     .selectAll("legend")
                     .data(valuesToShow)
                     .enter()
@@ -223,23 +214,23 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                     })
                     .attr('x2', xLabel)
                     .attr('y1', function (d) {
-                        return height - 100 - z(d)
+                        return height2 - 100 - z(d)
                     })
                     .attr('y2', function (d) {
-                        return height - 100 - z(d)
+                        return height2 - 100 - z(d)
                     })
                     .attr('stroke', 'black')
                     .style('stroke-dasharray', ('2,2'))
 
                 // Add legend: labels
-                svg
+                svg2
                     .selectAll("legend")
                     .data(valuesToShow)
                     .enter()
                     .append("text")
                     .attr('x', xLabel)
                     .attr('y', function (d) {
-                        return height - 100 - z(d)
+                        return height2 - 100 - z(d)
                     })
                     .text(function (d) {
                         return d
@@ -248,16 +239,16 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                     .attr('alignment-baseline', 'middle')
 
                 // Legend title
-                svg.append("text")
+                svg2.append("text")
                     .attr('x', xCircle)
-                    .attr("y", height - 100 + 30)
+                    .attr("y", height2 - 100 + 30)
                     .text("Population (M)")
                     .attr("text-anchor", "middle")
 
                 // Add one dot in the legend for each name.
                 var size = 20
                 var allgroups = ["Asia", "Europe", "North America", "South America", "Africa", "Oceania"]
-                svg.selectAll("myrect")
+                svg2.selectAll("myrect")
                     .data(allgroups)
                     .enter()
                     .append("circle")
@@ -275,7 +266,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                     .on("mouseleave", noHighlight)
 
                 // Add labels beside legend dots
-                svg.selectAll("mylabels")
+                svg2.selectAll("mylabels")
                     .data(allgroups)
                     .enter()
                     .append("text")
@@ -368,9 +359,6 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                 //
                 // }
             }
-        // })
-
-    // }
 });
 
 
