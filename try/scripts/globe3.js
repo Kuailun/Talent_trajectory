@@ -1,5 +1,4 @@
 d3.csv("https://gist.githubusercontent.com/ycfan14/2c09391f468fd8b3a4c3614e62d7d3a5/raw/78012a95feb12768c9bc8cae6de988321c388942/gistfile1.txt", function(allflow){
-
 var width = 960,
     height = 500;
 
@@ -17,12 +16,12 @@ var loftedProjection = d3.geoOrthographic()
     .precision(0.1)
     .rotate([-10,-30]);;
 
-//var canvas = d3.select("body").append("canvas")
-   //.attr("width", width)
-   // .attr("height", height);
- var canvas = d3.select("#portfolio").append("canvas")
-     .attr("width", width)
-     .attr("height", height);
+var canvas = d3.select("#portfolio").append("canvas")
+    .attr("width", width)
+    .attr("height", height);
+// var canvas = d3.select("#portfolio").append("canvas")
+//     .attr("width", width)
+//     .attr("height", height);
 
 var context = canvas.node().getContext("2d");
 
@@ -62,14 +61,9 @@ function locationAlongArc(start, end, theta) {
     return d3.geoInterpolate(start, end)(theta);
 };
 
-var dict = {
-    inflow: "#00ffff",
-    outflow: "#FF00FF"
-  };
-
 /**===== ===== ===== ===== ===== Define the global variables ===== ===== ===== ===== =====**/
 var e
-var selected_inst="mit"
+var selected_inst="MIT"
 var feature=[]
 var links=[]
 var selectedData = Object.create(null);
@@ -78,47 +72,22 @@ var lines=[]
 //Prevent error when first load
         statemachine()
 //Onchange function to process after change the drop down
-console.log(document.getElementById("selectedInstitution"))
-var select = d3.select('#selectedInstitution')
-    .on('change',onchange)
-console.log(select)
-function onchange(){console.log('heheheeheheheheheh')}
-document.getElementById("selectedInstitution").onchange=function () {
-    console.log(2323323232232)
+document.getElementById("selected_institution").onchange=function () {
     statemachine()
 }
 
 
         document.getElementById("selected_inoutflow").onchange=function () {
-            console.log(83848348348384384328423958729387)
-            statemachine()
-        }
-
-        document.getElementById("myRange").onchange=function () {
             statemachine()
         }
         function statemachine(){
             e = document.getElementById("selected_inoutflow");
             selected_inoutflow= e.options[e.selectedIndex].value;
-            ee = document.getElementById("selectedInstitution");
+            ee = document.getElementById("selected_institution");
             selected_inst= ee.options[ee.selectedIndex].value;
 
             console.log(selected_inst)
             console.log(selected_inoutflow)
-
-            //slider
-            slider = document.getElementById("myRange")
-            selected_year=slider.value;
-            output = document.getElementById("demo");
-            output.innerHTML = slider.value;
-            console.log(selected_year)
-
-            slider.oninput = function() {
-            output.innerHTML = this.value;
-            }
-
-            color=dict[selected_inoutflow]
-            console.log(color)
 
             feature=[]
             links=[]
@@ -127,7 +96,8 @@ document.getElementById("selectedInstitution").onchange=function () {
 
             allflow.forEach(function(a) {
 
-                    if (parseFloat(a[selected_inst])==1&&parseFloat(a[selected_inoutflow])==1&&parseFloat(a["year"])==selected_year) {
+                    if (parseFloat(a[selected_inst])==1&&parseFloat(a[selected_inoutflow])==1) {
+                        console.log(a)
                         var source_lat = parseFloat(a.lat),
                             source_lng = parseFloat(a.lng),
                             target_lat = parseFloat(a.des_lat),
@@ -226,18 +196,17 @@ d3.json("https://unpkg.com/world-atlas/world/110m.json", function(error, world) 
         context.lineWidth = .1;
         context.strokeStyle = '#FF00FF';
         context.stroke();
-        // color for outflow lines: #00ffff
-
-        context.beginPath();
-        path(selectedData);
-        context.lineWidth = 1;
-        context.stroke();
+        // color for outflow lines: #00ffff 
 
         // context.beginPath();
-        // path2(selectedData);
+        // path(selectedData);
         // context.lineWidth = 1;
-        // context.strokeStyle = color,
         // context.stroke();
+
+        context.beginPath();
+        path2(selectedData);
+        context.lineWidth = 1;
+        context.stroke();
 
     }
 })

@@ -21,79 +21,108 @@
             font-family: "Open Sans", sans-serif;
             font-size: 12px;
         }
-        .slidecontainer {
-  width: 100%;
-}
 
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 25px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-}
+        body {
+            font: 10px sans-serif;
+        }
 
-.slider:hover {
-  opacity: 1;
-}
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
 
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: #4CAF50;
-  cursor: pointer;
-}
+        .bar {
+            fill: steelblue;
+        }
 
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  background: #4CAF50;
-  cursor: pointer;
-}
+        .x.axis path {
+            display: none;
+        }
+
+        .tooltip{
+            text-anchor: middle;
+            font-family: sans-serif;
+            font-size: 10px;
+            font-weight: bold;
+            fill:black;
+        }
+
+        .bubbles {
+            stroke-width: 1px;
+            stroke: black;
+            opacity: .8
+        }
+        .bubbles:hover {
+            stroke: black;
+        }
+
     </style>
 </head>
-<body> 
-    <div class="slidecontainer">
-      <input type="range" min="1985" max="2015" value="30" class="slider" id="myRange">
-          <p>Year: <span id="demo"></span></p>
-    </div>
-    <select id="selected_institution">
-           <option value="MIT">MIT</option>
-           <option value="HARVARD">Harvard</option>
-           <option value="STANFORD">Stanford</option>
-           <option value="BERKELEY">UC Berkeley</option>
-           <option value="CMU">CMU</option>
-           <option value="CHICAGO">U Chicago</option>
-           <option value="OXFORD">Oxford</option>
-           <option value="CAMBRIDGE">Cambridge</option>
-           <option value="SACLAY">Saclay</option>
-           <option value="COPENHAGEN">Copenhagen</option>
-           <option value="MCGILL">McGill U</option>
-           <option value="TORONTO">UToronto</option>
-           <option value="TOKYO">UTokyo</option>
-           <option value="KYOTO">UKyoto</option>
-           <option value="TSINGHUA">Tsinghua</option>
-           <option value="PEKING">Peking</option>
-           <option value="NUS">NUS</option>
-           <option value="WEIZMANN">WEIZMANN</option>
-           <option value="CAPE">Cape Town</option>
-          </select>
-    <select id="selected_inoutflow">
-           <option value="inflow">Inflow</option>
-           <option value="outflow">Outflow</option>
-           </select>         
+
+<!--<div id="my_dataviz"></div>-->
+<!--&lt;!&ndash;<script src="scripts/lineChart.js"></script>&ndash;&gt;-->
+
+<!--<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>-->
+<!--<script src="https://unpkg.com/d3-simple-slider"></script>-->
+
+<!--<link-->
+<!--        rel="stylesheet"-->
+<!--        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"-->
+<!--        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"-->
+<!--        crossorigin="anonymous"-->
+<!--/>-->
+
+<!--<div class="row align-items-center">-->
+<!--    <div class="col-sm-2"><p id="value-time"></p></div>-->
+<!--    <div class="col-sm"><div id="slider-time"></div></div>-->
+<!--</div>-->
+
+
+<!--<script src="scripts/slider.js"> </script>-->
+<!--<script src="scripts/bubbleChart.js"></script>-->
+
+
+<body>
+<!--    <select id="selected_institution">-->
+<!--           <option value="MIT">MIT</option>-->
+<!--           <option value="HARVARD">Harvard</option>-->
+<!--           <option value="STANFORD">Stanford</option>-->
+<!--           <option value="BERKELEY">UC Berkeley</option>-->
+<!--           <option value="CMU">CMU</option>-->
+<!--           <option value="CHICAGO">U Chicago</option>-->
+<!--           <option value="OXFORD">Oxford</option>-->
+<!--           <option value="CAMBRIDGE">Cambridge</option>-->
+<!--           <option value="SACLAY">Saclay</option>-->
+<!--           <option value="COPENHAGEN">Copenhagen</option>-->
+<!--           <option value="MCGILL">McGill U</option>-->
+<!--           <option value="TORONTO">UToronto</option>-->
+<!--           <option value="TOKYO">UTokyo</option>-->
+<!--           <option value="KYOTO">UKyoto</option>-->
+<!--           <option value="TSINGHUA">Tsinghua</option>-->
+<!--           <option value="PEKING">Peking</option>-->
+<!--           <option value="NUS">NUS</option>-->
+<!--           <option value="WEIZMANN">WEIZMANN</option>-->
+<!--           <option value="CAPE">Cape Town</option>-->
+<!--          </select>-->
+<!--    <select id="selected_inoutflow">-->
+<!--           <option value="inflow">Inflow</option>-->
+<!--           <option value="outflow">Outflow</option>-->
+<!--           </select>-->
     <!--<canvas id="myCanvas" width="400" height="400" style="border:1px solid #000000;">-->
     <!--</canvas>-->
     <!-- <script src="https://static.observablehq.com/bundle.7967242bbce0924a9d34b0462e77d4dbd7a58df3088794fad513ca325e419ab0.js" integrity="sha512-XMx8G6tP080sQDhW4BhujCoLGh4BN409JwJ775pRP96LXVlxu+WLrJSDCHMi3cL1Sue+CrpscpFOLOtb3feMDg==" crossorigin=""></script>     -->
     <!-- <script async="" src="https://www.google-analytics.com/analytics.js"></script> -->
-    <!--<script src="scripts/globe.js"></script>-->
+<!--    <script src="scripts/globe.js"></script>-->
     <script src="https://bundle.run/zebras@0.0.11" ></script>
-    <script src="scripts/globe3.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.13/d3.min.js"></script>-->
+<!--    <script src="scripts/stackedBarChart.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script src="scripts/growthTrend.js"></script>
+
+
+
 
 </body>
 </html>
