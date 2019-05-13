@@ -16,7 +16,7 @@ var loftedProjection = d3.geoOrthographic()
     .precision(0.1)
     .rotate([-10,-30]);;
 
-var canvas = d3.select("body").append("canvas")
+var canvas = d3.select("#portfolio").append("canvas")
     .attr("width", width)
     .attr("height", height);
 // var canvas = d3.select("#portfolio").append("canvas")
@@ -63,7 +63,7 @@ function locationAlongArc(start, end, theta) {
 
 /**===== ===== ===== ===== ===== Define the global variables ===== ===== ===== ===== =====**/
 var e
-var selected_inst="mit"
+var selected_inst="MIT"
 var feature=[]
 var links=[]
 var selectedData = Object.create(null);
