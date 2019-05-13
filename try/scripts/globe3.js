@@ -98,21 +98,21 @@ d3.csv("https://gist.githubusercontent.com/zhengyunhan/b12f08d923dd80affc2a66afc
             ee = document.getElementById("selected_institution");
             selected_inst= ee.options[ee.selectedIndex].value;
 
-            console.log(selected_inst)
-            console.log(selected_inoutflow)
+            // console.log(selected_inst)
+            // #console.log(selected_inoutflow)
 
             slider = document.getElementById("myRange")
             selected_year=slider.value;
             output = document.getElementById("demo");
             output.innerHTML = slider.value;
-            console.log(selected_year)
+            // console.log(selected_year)
 
             slider.oninput = function() {
                 output.innerHTML = this.value;
             }
 
             color=dict[selected_inoutflow]
-            console.log(color)
+            // console.log(color)
 
 
             feature=[]
@@ -123,7 +123,7 @@ d3.csv("https://gist.githubusercontent.com/zhengyunhan/b12f08d923dd80affc2a66afc
             allflow.forEach(function(a) {
 
                     if (parseFloat(a[selected_inst])==1&&parseFloat(a[selected_inoutflow])==1&&parseFloat(a["year"])==selected_year) {
-                        console.log(a)
+                        // console.log(a)
                         var source_lat = parseFloat(a.lat),
                             source_lng = parseFloat(a.lng),
                             target_lat = parseFloat(a.des_lat),

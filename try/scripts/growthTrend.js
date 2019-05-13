@@ -3,7 +3,7 @@ var margin = { top: 20, right: 100, bottom: 40, left: 100 };
 var height = 500 - margin.top - margin.bottom;
 var width = 800 - margin.left - margin.right;
 
-var svg = d3.select("#countryNumber").append("svg")
+var svg1 = d3.select("#country").append("svg")
     .attr("width",width + margin.left + margin.right)
     .attr("height",height + margin.top + margin.bottom)
     .append("g")
@@ -29,7 +29,7 @@ var line = d3.svg.line()
     .x(function(d) { return xScale(d.year); })
     .y(function(d) { return yScale(d.close); });
 
-var focus = svg.append("g").style("display","none");
+var focus = svg1.append("g").style("display","none");
 
 // import data and create chart
 d3.csv("https://gist.githubusercontent.com/ycfan14/bc58e86c56ce01808cd26a2c59d74bf8/raw/4bd9e6f9e694ffebea46f1bf96c481c5c644de43/countryNumber_continent.csv", function(d) {
@@ -46,23 +46,26 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/bc58e86c56ce01808cd26a2c59d74
     function(error,data) {
 
         // sort data ascending - needed to get correct bisector results
-        data.sort(function(a,b) {
+        data.sort(function (a, b) {
             return a.year - b.year;
         });
 
         // color domain
-        color.domain(d3.keys(data[0]).filter(function(key) { return key !== "year"; }));
+        color.domain(d3.keys(data[0]).filter(function (key) {
+            return key !== "year";
+        }));
 
 
         // create stocks array with object for each company containing all data
-        var stocks = color.domain().map(function(name) {
+        var stocks = color.domain().map(function (name) {
             return {
                 name: name,
-                values: data.map(function(d){
+                values: data.map(function (d) {
                     return {year: d.year, close: d[name]};
                 })
             };
         });
+
 
         // add domain ranges to the x and y scales
         xScale.domain([
@@ -76,13 +79,13 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/bc58e86c56ce01808cd26a2c59d74
         ]);
 
         // add the x axis
-        svg.append("g")
+        svg1.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
 
         // add the y axis
-        svg.append("g")
+        svg1.append("g")
             .attr("class", "y axis")
             .call(yAxis)
             .append("text")
@@ -119,17 +122,17 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/bc58e86c56ce01808cd26a2c59d74
             .attr("y2", height);
 
         //append rectangle for capturing if mouse moves within area
-        svg.append("rect")
+        svg1.append("rect")
             .attr("width",width)
             .attr("height",height)
             .style("fill","none")
             .style("pointer-events","all")
             .on("mouseover", function() { focus.style("display", null); })
             .on("mouseout", function() { focus.style("display", "none"); })
-            .on("mousemove", mousemove);
+            .on("mousemove", mousemove)
 
         // add the line groups
-        var stock = svg.selectAll(".stockXYZ")
+        var stock = svg1.selectAll(".stockXYZ")
             .data(stocks)
             .enter().append("g")
             .attr("class","stockXYZ");
@@ -198,7 +201,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/bc58e86c56ce01808cd26a2c59d74
 
         };
 
-    });
+     });
 
 
 
