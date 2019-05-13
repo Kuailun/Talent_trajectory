@@ -22,7 +22,7 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .tickFormat(d3.format(".2s"));
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#stock").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -37,12 +37,15 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/29b27dd35f9acab0b567f1e72c647
     if (error) throw error;
     color.domain(d3.keys(data[0]).filter(function(key) { return key !== "year"; }));
 
+
     data.forEach(function(d) {
-        var myYear = d.year; //add to stock code
-        var y0 = 0;
-        //d.ages = color.domain().map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
-        d.continents = color.domain().map(function(name) { return {myYear:myYear, name: name, y0: y0, y1: y0 += +d[name]}; });
-        d.total = d.continents[d.continents.length - 1].y1;
+            var myYear = d.year; //add to stock code
+            var y0 = 0;
+            //d.ages = color.domain().map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
+            d.continents = color.domain().map(function (name) {
+                return {myYear: myYear, name: name, y0: y0, y1: y0 += +d[name]};
+            });
+            d.total = d.continents[d.continents.length - 1].y1;
     });
 
     data.sort(function(a, b) { return a.total - b.total; });
@@ -63,7 +66,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/29b27dd35f9acab0b567f1e72c647
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("Stock");
+        .text("Talent Stock");
 
     var year = svg.selectAll(".year")
         .data(data)

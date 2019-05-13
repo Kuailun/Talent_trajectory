@@ -3,7 +3,7 @@ var margin = { top: 20, right: 100, bottom: 40, left: 100 };
 var height = 500 - margin.top - margin.bottom;
 var width = 800 - margin.left - margin.right;
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#countryNumber").append("svg")
     .attr("width",width + margin.left + margin.right)
     .attr("height",height + margin.top + margin.bottom)
     .append("g")

@@ -1,5 +1,5 @@
-var dataTime = d3.range(0, 10).map(function(d) {
-    return new Date(1978 + d, 10, 3);
+var dataTime = d3.range(0, 8).map(function(d) {
+    return new Date(1980 + 5*d, 10, 3);
 });
 
 var sliderTime = d3
