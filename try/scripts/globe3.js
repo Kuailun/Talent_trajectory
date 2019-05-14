@@ -233,6 +233,7 @@ d3.csv("https://gist.githubusercontent.com/zhengyunhan/b12f08d923dd80affc2a66afc
                 context.strokeStyle = color;
                 context.stroke();
 
+        
             }
         })
 

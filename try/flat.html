@@ -40,7 +40,7 @@ var graticule = d3.geo.graticule();
 var canvas1 = d3.select("body").append("canvas")
     .attr("width", width)
     .attr("height", height);
-	
+
 var canvas2 = d3.select("body").append("canvas")
     .attr("width", width)
     .attr("height", height);
@@ -51,7 +51,7 @@ var context2 = canvas2.node().getContext("2d");
 var path1 = d3.geo.path()
     .projection(projection1)
     .context(context1);
-	
+
 var path2 = d3.geo.path()
     .projection(projection2)
     .context(context2);
@@ -135,8 +135,8 @@ function addArc( path, context )
     context.fill();
     context.stroke();
 
-    
-	
+
+
     context.lineWidth = 2;
     context.strokeStyle = "rgba(0,100,0,.7)";
     context.beginPath();
@@ -202,7 +202,7 @@ var λ = speed * (Date.now() - start),
   context1.strokeStyle = "rgba(0,100,0,.5)";
   context1.stroke();
 
-   addArc( path1, context1 );
+  //  addArc( path1, context1 );
 
 
   context2.clearRect(0, 0, width, height);
@@ -235,7 +235,7 @@ var λ = speed * (Date.now() - start),
   context2.strokeStyle = "rgba(0,100,0,.5)";
   context2.stroke();
 
-  addArc( path2, context2 );
+  // addArc( path2, context2 );
 });})
 
 d3.select(self.frameElement).style("height", height + "px");
