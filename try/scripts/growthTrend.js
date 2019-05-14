@@ -1,17 +1,17 @@
 // basic SVG setup
-var margin = { top: 20, right: 100, bottom: 40, left: 100 };
-var height = 500 - margin.top - margin.bottom;
-var width = 800 - margin.left - margin.right;
+var margin3 = { top: 20, right: 100, bottom: 40, left: 100 };
+var height3 = 500 - margin3.top - margin3.bottom;
+var width3 = 800 - margin3.left - margin3.right;
 
 var svg1 = d3.select("#country").append("svg")
-    .attr("width",width + margin.left + margin.right)
-    .attr("height",height + margin.top + margin.bottom)
+    .attr("width",width3 + margin3.left + margin3.right)
+    .attr("height",height3 + margin3.top + margin3.bottom)
     .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")");
 
 // setup scales - the domain is specified inside of the function called when we load the data
-var xScale = d3.time.scale().range([0, width]);
-var yScale = d3.scale.linear().range([height, 0]);
+var xScale = d3.time.scale().range([0, width3]);
+var yScale = d3.scale.linear().range([height3, 0]);
 var color = d3.scale.category10();
 
 // setup the axes
@@ -81,7 +81,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/bc58e86c56ce01808cd26a2c59d74
         // add the x axis
         svg1.append("g")
             .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
+            .attr("transform", "translate(0," + height3 + ")")
             .call(xAxis);
 
         // add the y axis
@@ -110,7 +110,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/bc58e86c56ce01808cd26a2c59d74
             .attr("stroke-dasharray","3,3")
             .style("opacity",0.5)
             .attr("x1", 0)
-            .attr("x2", width);
+            .attr("x2", width3);
 
         // add vertical line at intersection
         focus.append("line")
@@ -119,12 +119,12 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/bc58e86c56ce01808cd26a2c59d74
             .attr("stroke-dasharray","3,3")
             .style("opacity",0.5)
             .attr("y1", 0)
-            .attr("y2", height);
+            .attr("y2", height3);
 
         //append rectangle for capturing if mouse moves within area
         svg1.append("rect")
-            .attr("width",width)
-            .attr("height",height)
+            .attr("width",width3)
+            .attr("height",height3)
             .style("fill","none")
             .style("pointer-events","all")
             .on("mouseover", function() { focus.style("display", null); })
@@ -190,7 +190,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/bc58e86c56ce01808cd26a2c59d74
                 .attr("transform", "translate(" + xScale(d.year) + "," + yScale(close) + ")");
 
             focus.select("line.y")
-                .attr("y2",height - yScale(close))
+                .attr("y2",height3 - yScale(close))
                 .attr("transform", "translate(" + xScale(d.year) + ","
                     + yScale(close) + ")");
 

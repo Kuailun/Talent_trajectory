@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
 var margin2 = {top: 40, right: 150, bottom: 60, left: 60},
-    width2 = 550 - margin2.left - margin2.right,
-    height2 = 420 - margin2.top - margin2.bottom;
+    width2 = 600 - margin2.left - margin2.right,
+    height2 = 500 - margin2.top - margin2.bottom;
 
 // append the svg object to the body of the page
 var svg2 = d3.select("#bubble")
@@ -46,9 +46,10 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
 
                 //Add X axis
                 var x = d3.scaleLinear()
-                    .domain([0, d3.max(data.filter(function(d) { return d["year"] == selected_year }), function (d) {
-                        return +d.inflow;
-                    })])
+                    .domain([0, 400])
+                    // .domain([0, d3.max(data.filter(function(d) { return d["year"] == selected_year }), function (d) {
+                    //     return +d.inflow;
+                    // })])
                     .range([0, width2]);
 
                 svg2.append("g")
@@ -65,9 +66,10 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
 
                 // Add Y axis
                 var y = d3.scaleLinear()
-                    .domain([0, d3.max(data.filter(function(d) { return d["year"] == selected_year }), function (d) {
-                        return +d.outflow;
-                    })])
+                    .domain ([0,600])
+                    // .domain([0, d3.max(data.filter(function(d) { return d["year"] == selected_year }), function (d) {
+                    //     return +d.outflow;
+                    // })])
                     .range([height2, 0]);
                 svg2.append("g")
                     .call(d3.axisLeft(y));
@@ -82,9 +84,10 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
 
                 // Add a scale for bubble size
                 var z = d3.scaleSqrt()
-                    .domain([0, d3.max(data.filter(function(d) { return d["year"] == selected_year }), function (d) {
-                        return +d.stock;
-                    })])
+                    .domain([0,600])
+                    // .domain([0, d3.max(data.filter(function(d) { return d["year"] == selected_year }), function (d) {
+                    //     return +d.stock;
+                    // })])
                     .range([2, 30]);
 
         var schemeSet1=["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf", "#999999"];
@@ -110,7 +113,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                 // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
                 var showTooltip = function (d) {
                     tooltip
-                        .transition(500)
+                        .transition()
                         .duration(500)
                     tooltip
                         .style("opacity", 1)
@@ -125,7 +128,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                 }
                 var hideTooltip = function (d) {
                     tooltip
-                        .transition(500)
+                        .transition()
                         .duration(500)
                         .style("opacity", 0)
                 }
@@ -184,8 +187,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                 // ---------------------------//
 
                 // Add legend: circles
-                var valuesToShow = [10, 100]
-                //??????
+                var valuesToShow = [10, 100,1000]
                 var xCircle = 390
                 var xLabel = 440
                 svg2
@@ -252,9 +254,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                     .data(allgroups)
                     .enter()
                     .append("circle")
-                    //??????
                     .attr("cx", 390)
-                    //??????
                     .attr("cy", function (d, i) {
                         return 10 + i * (size + 5)
                     }) // 100 is where the first dot appears. 25 is the distance between dots
