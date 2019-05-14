@@ -1,5 +1,5 @@
 d3.csv("https://gist.githubusercontent.com/zhengyunhan/b12f08d923dd80affc2a66afc384b97c/raw/ef446ad1c91d148bf75e96cf6fae4f5fefac9333/institution_inoutflow.csv", function(allflow){
-        var width = 960,
+        var width = 900,
             height = 500;
 
         var velocity = .01;
