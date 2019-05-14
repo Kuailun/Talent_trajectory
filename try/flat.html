@@ -20,7 +20,7 @@ body {
 <script>
 d3.csv("https://gist.githubusercontent.com/cesandoval/b834ac93c07e03ec5205843b97f68017/raw/6e4408bc870e2484ad860aa3e61f2cc0e0610a1e/scfulldata%2520-%2520scfulldata.csv.csv", function(allflow){
 var width = 400,
-    height = 400,
+    height = 500,
     speed = 1e-2,
     start = Date.now();
 
@@ -202,7 +202,7 @@ var λ = speed * (Date.now() - start),
   context1.strokeStyle = "rgba(0,100,0,.5)";
   context1.stroke();
 
-   addArc( path1, context1 );
+  //  addArc( path1, context1 );
 
 
   context2.clearRect(0, 0, width, height);
@@ -235,7 +235,7 @@ var λ = speed * (Date.now() - start),
   context2.strokeStyle = "rgba(0,100,0,.5)";
   context2.stroke();
 
-  addArc( path2, context2 );
+  // addArc( path2, context2 );
 });})
 
 d3.select(self.frameElement).style("height", height + "px");
