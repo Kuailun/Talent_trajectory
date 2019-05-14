@@ -177,12 +177,43 @@
 
       </style>
   <!-- trend Section -->
-  <section class="page-section " id="trends">
+  <section class="page-section align-items-center justify-content-center text-center" id="trends">
+      <h3 class=" mt-0">Talent Decentrialization: Increasing Number of Counties With Top Scholars</h3>
   <div id="country"></div>
+  <a class="btn btn-primary btn-xl js-scroll-trigger" href="#flowonmap">To Trend2</a>
+  
+</section>
+  <!-- flow by country Section -->
+  
+  <section class="page-section align-items-center justify-content-center text-center " id="flowonmap">
+      <h3 class=" mt-0">Talent Decentrialization: Communications Extend To More Continents</h3>
+    <div class="container">
+        <object type="text/html" width="900"
+        height="1000" data="try/flat.html">
+        </object>
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="text-white mt-0">two map showing stock contrast from 1985-2015 </h2>
+
+
+
+          <hr class="divider light my-4">
+
+        </div>
+      </div>
+    </div>
+    <h3 class=" mt-0">But The Proportion of Continents Seems Static</h3>
   <div id="stock"></div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.13/d3.min.js"></script>
   <script src="try/scripts/growthTrend.js"></script>
   <script src="try/scripts/stackedBarChart.js"></script>
+  <a class="btn btn-primary btn-xl js-scroll-trigger" href="#trend3">To Trend3</a>
+</section>
+
+<section class="page-section align-items-center justify-content-center text-center" id="trend3">
+  <hr class="divider my-4">
+  <h3 class=" mt-0">Which countires grow fast in inflow/outflow?</h3>
   <div id="bubble"></div>
 <!--  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>-->
   <link
@@ -191,6 +222,7 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous"
   />
+  
   <div class="slidecontainer">
     <input type="range" min="1979" max="2015" value="30" class="slider" id="bubbleRange">
     <p>Year: <span id="demo2"></span></p >
@@ -244,29 +276,12 @@
     </div>
 
   </section>
-  <!-- flow by country Section -->
-  <section class="page-section " id="flowonmap">
-    <div class="container">
-        <object type="text/html" width="900"
-        height="1000" data="try/flat.html">
-        </object>
-      <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <h2 class="text-white mt-0">two map showing stock contrast from 1985-2015 </h2>
 
-
-
-          <hr class="divider light my-4">
-          <a class="btn btn-primary btn-xl js-scroll-trigger" href="#portfolio">ZOOM INTO TOP SCHOOLS</a>
-        </div>
-      </div>
-    </div>
-  </section>
   <!-- INSTITUTION Section -->
 
   <!-- Flow Globe Section -->
 
-  <section  id="portfolio">
+  <section  class="align-items-center justify-content-center text-center"id="portfolio">
     <script src="try/scripts/globe3.js"></script>
     <div class="slidecontainer">
       <input type="range" min="1978" max="2015" value="30" class="slider" id="myRange">

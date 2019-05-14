@@ -20,7 +20,7 @@ body {
 <script>
 d3.csv("https://gist.githubusercontent.com/cesandoval/b834ac93c07e03ec5205843b97f68017/raw/6e4408bc870e2484ad860aa3e61f2cc0e0610a1e/scfulldata%2520-%2520scfulldata.csv.csv", function(allflow){
 var width = 400,
-    height = 500,
+    height = 600,
     speed = 1e-2,
     start = Date.now();
 
@@ -40,7 +40,7 @@ var graticule = d3.geo.graticule();
 var canvas1 = d3.select("body").append("canvas")
     .attr("width", width)
     .attr("height", height);
-	
+
 var canvas2 = d3.select("body").append("canvas")
     .attr("width", width)
     .attr("height", height);
@@ -51,7 +51,7 @@ var context2 = canvas2.node().getContext("2d");
 var path1 = d3.geo.path()
     .projection(projection1)
     .context(context1);
-	
+
 var path2 = d3.geo.path()
     .projection(projection2)
     .context(context2);
@@ -135,8 +135,8 @@ function addArc( path, context )
     context.fill();
     context.stroke();
 
-    
-	
+
+
     context.lineWidth = 2;
     context.strokeStyle = "rgba(0,100,0,.7)";
     context.beginPath();
