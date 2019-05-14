@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
 var margin2 = {top: 40, right: 150, bottom: 60, left: 60},
-    width2 = 600 - margin2.left - margin2.right,
-    height2 = 500 - margin2.top - margin2.bottom;
+    width2 = 700 - margin2.left - margin2.right,
+    height2 = 600 - margin2.top - margin2.bottom;
 
 var tooltip1 = d3.select("#bubble")
     .append("div")
@@ -197,8 +197,8 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
 
                 // Add legend: circles
                 var valuesToShow = [10, 100,1000]
-                var xCircle = 390
-                var xLabel = 440
+                var xCircle = 500
+                var xLabel = 550
                 svg2
                     .selectAll("legend")
                     .data(valuesToShow)
@@ -253,7 +253,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                 svg2.append("text")
                     .attr('x', xCircle)
                     .attr("y", height2 - 100 + 30)
-                    .text("Population (M)")
+                    .text("stock")
                     .attr("text-anchor", "middle")
 
                 // Add one dot in the legend for each name.
@@ -263,7 +263,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                     .data(allgroups)
                     .enter()
                     .append("circle")
-                    .attr("cx", 390)
+                    .attr("cx", 500)
                     .attr("cy", function (d, i) {
                         return 10 + i * (size + 5)
                     }) // 100 is where the first dot appears. 25 is the distance between dots
@@ -279,7 +279,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                     .data(allgroups)
                     .enter()
                     .append("text")
-                    .attr("x", 390 + size * .8)
+                    .attr("x", 500 + size * .8)
                     .attr("y", function (d, i) {
                         return i * (size + 5) + (size / 2)
                     }) // 100 is where the first dot appears. 25 is the distance between dots
