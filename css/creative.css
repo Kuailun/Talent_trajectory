@@ -630,6 +630,14 @@ pre code {
   padding-left: 15px;
 }
 
+.mCol{
+  float:left;
+  width:50%;
+  padding:5px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
 .col {
   -ms-flex-preferred-size: 0;
   flex-basis: 0;
