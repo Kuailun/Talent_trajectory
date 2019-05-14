@@ -1,7 +1,7 @@
 // basic SVG setup
 var margin3 = { top: 20, right: 100, bottom: 40, left: 100 };
-var height3 = 500 - margin3.top - margin3.bottom;
-var width3 = 800 - margin3.left - margin3.right;
+var height3 = 400 - margin3.top - margin3.bottom;
+var width3 = 600 - margin3.left - margin3.right;
 
 var svg1 = d3.select("#country").append("svg")
     .attr("width",width3 + margin3.left + margin3.right)
