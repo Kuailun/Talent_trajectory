@@ -104,12 +104,12 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/29b27dd35f9acab0b567f1e72c647
             svg.append("text")
                 .attr("x",xPos)
                 .attr("y",yPos +height/2)
-                .attr("class","tooltip")
+                .attr("class","mytooltip")
                 .text(d.name +": "+ delta);
 
         })
         .on("mouseout",function(){
-            svg.select(".tooltip").remove();
+            svg.select(".mytooltip").remove();
             d3.select(this).attr("stroke","pink").attr("stroke-width",0.2);
 
         })
