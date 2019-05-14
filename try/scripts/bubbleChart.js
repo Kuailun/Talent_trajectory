@@ -3,6 +3,14 @@ var margin2 = {top: 40, right: 150, bottom: 60, left: 60},
     width2 = 550 - margin2.left - margin2.right,
     height2 = 420 - margin2.top - margin2.bottom;
 
+var tooltip1 = d3.select("#bubble")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "black")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+    .style("color", "white")
 // append the svg object to the body of the page
 var svg2 = d3.select("#bubble")
     .append("svg")
@@ -98,33 +106,34 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                 // ---------------------------//
 
                 // -1- Create a tooltip div that is hidden by default:
-                var tooltip = d3.select("#bubble")
-                    .append("div")
-                    .style("opacity", 0)
-                    .attr("class", "tooltip")
-                    .style("background-color", "black")
-                    .style("border-radius", "5px")
-                    .style("padding", "10px")
-                    .style("color", "white")
+
+
 
                 // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
                 var showTooltip = function (d) {
-                    tooltip
-                        .transition(500)
+                    tooltip1
+                        .transition()
                         .duration(500)
-                    tooltip
+                        .on("end",function(){
+                            tooltip1
+                                .transition()
+                                .style("opacity",0)
+                        })
+                    tooltip1
                         .style("opacity", 1)
                         .html("Country: " + d.country_name)
                         .style("left", (d3.mouse(this)[0] + 30) + "px")
                         .style("top", (d3.mouse(this)[1] + 30) + "px")
+
                 }
                 var moveTooltip = function (d) {
-                    tooltip
+                    tooltip1
                         .style("left", (d3.mouse(this)[0] + 30) + "px")
                         .style("top", (d3.mouse(this)[1] + 30) + "px")
                 }
                 var hideTooltip = function (d) {
-                    tooltip
+                    console.log("hide")
+                    tooltip1
                         .transition(500)
                         .duration(500)
                         .style("opacity", 0)
@@ -177,7 +186,7 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                     // -3- Trigger the functions for hover
                     .on("mouseover", showTooltip)
                     .on("mousemove", moveTooltip)
-                    .on("mouseleave", hideTooltip)
+                    //.on("mouseleave", hideTooltip)
 
                 // ---------------------------//
                 //       LEGEND              //
