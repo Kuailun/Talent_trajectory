@@ -1,5 +1,5 @@
 d3.csv("https://gist.githubusercontent.com/zhengyunhan/b12f08d923dd80affc2a66afc384b97c/raw/ef446ad1c91d148bf75e96cf6fae4f5fefac9333/institution_inoutflow.csv", function(allflow){
-        var width = 900,
+        var width = 600,
             height = 500;
 
         var velocity = .01;
@@ -17,8 +17,12 @@ d3.csv("https://gist.githubusercontent.com/zhengyunhan/b12f08d923dd80affc2a66afc
             .rotate([-10,-30]);;
 
         var canvas = d3.select("#portfolio").append("canvas")
+            .attr("float","left")
+            .attr("margin-left","auto")
+            .attr("margin-right","auto")
             .attr("width", width)
             .attr("height", height);
+
 // var canvas = d3.select("#portfolio").append("canvas")
 //     .attr("width", width)
 //     .attr("height", height);
