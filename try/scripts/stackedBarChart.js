@@ -13,11 +13,11 @@ var color = d3.scale.ordinal()
 
 // .range(["#98abc5", "#8a89a6","#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
-var xAxis = d3.svg.axis()
+var xAxis1 = d3.svg.axis()
     .scale(x)
     .orient("bottom");
 
-var yAxis = d3.svg.axis()
+var yAxis1 = d3.svg.axis()
     .scale(y)
     .orient("left")
     .tickFormat(d3.format(".2s"));
@@ -56,11 +56,11 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/29b27dd35f9acab0b567f1e72c647
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
+        .call(xAxis1);
 
     svg.append("g")
         .attr("class", "y axis")
-        .call(yAxis)
+        .call(yAxis1)
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
