@@ -141,7 +141,7 @@ function addArc( path, context )
 
 
 
-    context.lineWidth = .5;
+    context.lineWidth = 2;
     context.strokeStyle = "rgba(100,100,255,.7)";
     context.beginPath();
     path({type: "LineString", coordinates: [[-0.8432, 51.4102],[-122.2744, 37.7561]] });
@@ -161,7 +161,7 @@ var λ = speed * (Date.now() - start),
   context1.beginPath();
   path1(sphere);
   context1.lineWidth = 3;
-  context1.strokeStyle = "	#dcdcdc";
+  context1.strokeStyle = "#000";
   context1.stroke();
   context1.fillStyle = "	#dcdcdc";
   context1.fill();
@@ -174,28 +174,36 @@ var λ = speed * (Date.now() - start),
 
   context1.beginPath();
   path1(land);
-  context1.fillStyle = "rgba(220,220,255,0.8)";
+  context1.fillStyle = "rgba(220,220,255,1)";
   context1.fill();
 
- 
+  context1.beginPath();
+  path1(grid);
+  context1.lineWidth = .5;
+  context1.strokeStyle = "rgba(229,229,255,.5)";
+  context1.stroke();
 
   context1.restore();
   projection1.rotate([λ, φ]);
 
- 
+  context1.beginPath();
+  path1(grid);
+  context1.lineWidth = .5;
+  context1.strokeStyle = "rgba(229,229,255,.5)";
+  context1.stroke();
 
   context1.beginPath();
   path1(land);
-  context1.fillStyle = "rgba(220,220,255,0.8)";
+  context1.fillStyle = "rgba(220,220,255,1)";
   context1.fill();
   context1.lineWidth = .5;
-  context1.strokeStyle = "	#dcdcdc";
+  context1.strokeStyle = "#000";
   context1.stroke();
 
   context1.beginPath();
   path1(selectedData);
-  context1.lineWidth = 1;
-  context1.strokeStyle = "rgba(20,20,255,1)";
+  context1.lineWidth = .75;
+  context1.strokeStyle = "rgba(70,70,255,.8)";
   context1.stroke();
 
   //  addArc( path1, context1 );
@@ -206,12 +214,16 @@ var λ = speed * (Date.now() - start),
   context2.beginPath();
   path2(sphere);
   context2.lineWidth = 3;
-  context2.strokeStyle = "	#dcdcdc";
+  context2.strokeStyle = "#000";
   context2.stroke();
   context2.fillStyle = "	#dcdcdc";
   context2.fill();
 
- 
+  context2.beginPath();
+  path2(grid);
+  context2.lineWidth = .5;
+  context2.strokeStyle = "rgba(229,229,255,.5)";
+  context2.stroke();
 
   context2.beginPath();
   path2(land);
@@ -224,7 +236,7 @@ var λ = speed * (Date.now() - start),
   context2.beginPath();
   path2(selectedData);
   context2.lineWidth = .5;
-  context2.strokeStyle = "rgba(20,20,255,1)";
+  context2.strokeStyle = "rgba(100,100,255,.5)";
   context2.stroke();
 
   // addArc( path2, context2 );
