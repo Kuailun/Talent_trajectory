@@ -125,14 +125,18 @@ d3.csv("https://gist.githubusercontent.com/ycfan14/1acff6fd6f3a6dacf34f39c16f8b5
                     tooltip1
                         .style("opacity", 1)
                         .html("Country: " + d.country_name)
-                        .style("left", (d3.mouse(this)[0] + 30) + "px")
-                        .style("top", (d3.mouse(this)[1] + 30+2227) + "px")
+                        .style("left", (d3.mouse(this)[0] + 630) + "px")
+                        .style("top", (d3.mouse(this)[1] + 7550) + "px")
+                    // .style("left", (0) + "px")
+                    // .style("top", (0) + "px")
 
                 }
                 var moveTooltip = function (d) {
                     tooltip1
-                        .style("left", (d3.mouse(this)[0] + 30) + "px")
-                        .style("top", (d3.mouse(this)[1] + 30+2227) + "px")
+                        .style("left", (d3.mouse(this)[0] + 630) + "px")
+                        .style("top", (d3.mouse(this)[1] + 7550) + "px")
+                    // .style("left", (0) + "px")
+                    // .style("top", (0) + "px")
                 }
                 var hideTooltip = function (d) {
                     console.log("hide")
