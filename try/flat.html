@@ -15,43 +15,6 @@ body {
     width:100px;
   }
 
-  .slidecontainer {
-  width: 100%;
-}
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 15px;
-  border-radius: 5px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-}
-
-.slider:hover {
-  opacity: 1;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: rgba(158,158,225,1);
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: rgba(158,158,225,1);
-  cursor: pointer;
-}
-
 </style>
 <!--</head>-->
 <script src="http://d3js.org/d3.v3.js"></script>
@@ -170,7 +133,7 @@ function addArc( path, context )
 	circles.push( circle() );
     context.fillStyle = "rgba(100,100,255,.5)";
     context.lineWidth = .2;
-    context.strokeStyle = "	#fff";
+    context.strokeStyle = "#000";
     context.beginPath();
     path({type: "GeometryCollection", geometries: circles});
     context.fill();
@@ -197,10 +160,10 @@ var λ = speed * (Date.now() - start),
 
   context1.beginPath();
   path1(sphere);
-  context1.lineWidth = 1;
-  context1.strokeStyle = "rgba(0,0,0,.3";
+  context1.lineWidth = 3;
+  context1.strokeStyle = "#000";
   context1.stroke();
-  context1.fillStyle = "	#fff";
+  context1.fillStyle = "#fff";
   context1.fill();
 
   context1.save();
@@ -217,7 +180,7 @@ var λ = speed * (Date.now() - start),
   context1.beginPath();
   path1(grid);
   context1.lineWidth = .5;
-  context1.strokeStyle = "rgba(229,229,255,.5)";
+  context1.strokeStyle = "rgba(119,119,255,.5)";
   context1.stroke();
 
   context1.restore();
@@ -226,7 +189,7 @@ var λ = speed * (Date.now() - start),
   context1.beginPath();
   path1(grid);
   context1.lineWidth = .5;
-  context1.strokeStyle = "rgba(229,229,255,.5)";
+  context1.strokeStyle = "rgba(119,119,255,.5)";
   context1.stroke();
 
   context1.beginPath();
@@ -234,7 +197,7 @@ var λ = speed * (Date.now() - start),
   context1.fillStyle = "rgba(220,220,255,1)";
   context1.fill();
   context1.lineWidth = .5;
-  context1.strokeStyle = "rgba(0,0,0,.3";
+  context1.strokeStyle = "#000";
   context1.stroke();
 
   context1.beginPath();
@@ -251,23 +214,23 @@ var λ = speed * (Date.now() - start),
   context2.beginPath();
   path2(sphere);
   context2.lineWidth = 3;
-  context2.strokeStyle = "rgba(0,0,0,.3";
+  context2.strokeStyle = "#000";
   context2.stroke();
-  context2.fillStyle = "	#fff";
+  context2.fillStyle = "#fff";
   context2.fill();
 
   context2.beginPath();
   path2(grid);
   context2.lineWidth = .5;
-  context2.strokeStyle = "rgba(229,229,255,.5)";
+  context2.strokeStyle = "rgba(119,119,255,.5)";
   context2.stroke();
 
   context2.beginPath();
   path2(land);
-  context2.fillStyle = "rgba(220,220,255,.8)";
+  context2.fillStyle = "rgba(220,220,255,1)";
   context2.fill();
   context2.lineWidth = .5;
-  context2.strokeStyle = "rgba(0,0,0,.3";
+  context2.strokeStyle = "#000";
   context2.stroke();
 
   context2.beginPath();
@@ -285,9 +248,7 @@ d3.select(self.frameElement).style("height", height + "px");
 
 </script>
 <center>
-    <div class="slidecontainer">
-  <input type="range" min="1978" max="2015" value="30" class="slider" id="myRange" style="margin-left: auto;margin-right: auto">
+  <input type="range" min="1978" max="2015" value="30" class="mslider" id="myRange" style="margin-left: auto;margin-right: auto">
   <p>Year: <span id="demo"></span></p >
-    </div>
 </center>
 
