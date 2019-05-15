@@ -170,7 +170,7 @@ function addArc( path, context )
 	circles.push( circle() );
     context.fillStyle = "rgba(100,100,255,.5)";
     context.lineWidth = .2;
-    context.strokeStyle = "	#dcdcdc";
+    context.strokeStyle = "	#fff";
     context.beginPath();
     path({type: "GeometryCollection", geometries: circles});
     context.fill();
@@ -197,10 +197,10 @@ var λ = speed * (Date.now() - start),
 
   context1.beginPath();
   path1(sphere);
-  context1.lineWidth = 3;
-  context1.strokeStyle = "#000";
+  context1.lineWidth = 1;
+  context1.strokeStyle = "rgba(0,0,0,.3";
   context1.stroke();
-  context1.fillStyle = "	#dcdcdc";
+  context1.fillStyle = "	#fff";
   context1.fill();
 
   context1.save();
@@ -234,7 +234,7 @@ var λ = speed * (Date.now() - start),
   context1.fillStyle = "rgba(220,220,255,1)";
   context1.fill();
   context1.lineWidth = .5;
-  context1.strokeStyle = "#000";
+  context1.strokeStyle = "rgba(0,0,0,.3";
   context1.stroke();
 
   context1.beginPath();
@@ -251,9 +251,9 @@ var λ = speed * (Date.now() - start),
   context2.beginPath();
   path2(sphere);
   context2.lineWidth = 3;
-  context2.strokeStyle = "#000";
+  context2.strokeStyle = "rgba(0,0,0,.3";
   context2.stroke();
-  context2.fillStyle = "	#dcdcdc";
+  context2.fillStyle = "	#fff";
   context2.fill();
 
   context2.beginPath();
@@ -267,7 +267,7 @@ var λ = speed * (Date.now() - start),
   context2.fillStyle = "rgba(220,220,255,.8)";
   context2.fill();
   context2.lineWidth = .5;
-  context2.strokeStyle = "#000";
+  context2.strokeStyle = "rgba(0,0,0,.3";
   context2.stroke();
 
   context2.beginPath();
